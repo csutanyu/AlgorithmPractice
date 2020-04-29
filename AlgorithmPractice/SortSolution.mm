@@ -42,6 +42,17 @@ void selectSort(int array[], int length) {
     }
 }
 
+void insertSort(int array[], int length) {
+    for (int index = 1; index < length; ++index) {
+        int cur = array[index];
+        int preIndex = index - 1;
+        while (preIndex >= 0 && array[preIndex] > cur ) {
+            array[preIndex + 1] = array[preIndex];
+            --preIndex;
+        }
+        array[preIndex + 1] = cur;
+    }
+}
 
 @implementation SortSolution
 

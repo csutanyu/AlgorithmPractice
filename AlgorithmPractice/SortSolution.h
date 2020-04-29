@@ -22,6 +22,9 @@ FOUNDATION_EXTERN void bubbleSort(int array[], int length);
 // 选择排序
 FOUNDATION_EXTERN void selectSort(int array[], int length);
 
+// 选择排序
+FOUNDATION_EXTERN void insertSort(int array[], int length);
+
 
 @interface SortSolution : NSObject
 
