@@ -15,7 +15,7 @@
 		ECE889EA245851DB00773E33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECE889E8245851DB00773E33 /* LaunchScreen.storyboard */; };
 		ECE889ED245851DB00773E33 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE889EC245851DB00773E33 /* main.m */; };
 		ECE889F5245851F000773E33 /* PalindromeSolution.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECE889F3245851F000773E33 /* PalindromeSolution.cpp */; };
-		ECE889F8245852F100773E33 /* SortAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECE889F6245852F100773E33 /* SortAlgorithm.cpp */; };
+		ECE88A22245922AA00773E33 /* SortSolution.mm in Sources */ = {isa = PBXBuildFile; fileRef = ECE88A21245922A900773E33 /* SortSolution.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,8 +33,8 @@
 		ECE889EC245851DB00773E33 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ECE889F3245851F000773E33 /* PalindromeSolution.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PalindromeSolution.cpp; sourceTree = "<group>"; };
 		ECE889F4245851F000773E33 /* PalindromeSolution.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PalindromeSolution.hpp; sourceTree = "<group>"; };
-		ECE889F6245852F100773E33 /* SortAlgorithm.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SortAlgorithm.cpp; sourceTree = "<group>"; };
-		ECE889F7245852F100773E33 /* SortAlgorithm.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SortAlgorithm.hpp; sourceTree = "<group>"; };
+		ECE88A20245922A900773E33 /* SortSolution.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SortSolution.h; sourceTree = "<group>"; };
+		ECE88A21245922A900773E33 /* SortSolution.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SortSolution.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,8 +75,8 @@
 				ECE889E1245851D900773E33 /* ViewController.m */,
 				ECE889F3245851F000773E33 /* PalindromeSolution.cpp */,
 				ECE889F4245851F000773E33 /* PalindromeSolution.hpp */,
-				ECE889F6245852F100773E33 /* SortAlgorithm.cpp */,
-				ECE889F7245852F100773E33 /* SortAlgorithm.hpp */,
+				ECE88A20245922A900773E33 /* SortSolution.h */,
+				ECE88A21245922A900773E33 /* SortSolution.mm */,
 				ECE889E3245851D900773E33 /* Main.storyboard */,
 				ECE889E6245851DB00773E33 /* Assets.xcassets */,
 				ECE889E8245851DB00773E33 /* LaunchScreen.storyboard */,
@@ -157,10 +157,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECE889F5245851F000773E33 /* PalindromeSolution.cpp in Sources */,
-				ECE889F8245852F100773E33 /* SortAlgorithm.cpp in Sources */,
 				ECE889E2245851D900773E33 /* ViewController.m in Sources */,
 				ECE889DC245851D900773E33 /* AppDelegate.m in Sources */,
 				ECE889ED245851DB00773E33 /* main.m in Sources */,
+				ECE88A22245922AA00773E33 /* SortSolution.mm in Sources */,
 				ECE889DF245851D900773E33 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
