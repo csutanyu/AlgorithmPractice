@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC16A7622474139900AFE379 /* ViewController.mm in Resources */ = {isa = PBXBuildFile; fileRef = EC16A7612474139900AFE379 /* ViewController.mm */; };
 		ECE889DC245851D900773E33 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE889DB245851D900773E33 /* AppDelegate.m */; };
 		ECE889DF245851D900773E33 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE889DE245851D900773E33 /* SceneDelegate.m */; };
-		ECE889E2245851D900773E33 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE889E1245851D900773E33 /* ViewController.m */; };
 		ECE889E5245851D900773E33 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECE889E3245851D900773E33 /* Main.storyboard */; };
 		ECE889E7245851DB00773E33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECE889E6245851DB00773E33 /* Assets.xcassets */; };
 		ECE889EA245851DB00773E33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECE889E8245851DB00773E33 /* LaunchScreen.storyboard */; };
@@ -19,13 +19,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EC16A7612474139900AFE379 /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		ECE889D7245851D900773E33 /* AlgorithmPractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlgorithmPractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECE889DA245851D900773E33 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		ECE889DB245851D900773E33 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		ECE889DD245851D900773E33 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		ECE889DE245851D900773E33 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		ECE889E0245851D900773E33 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		ECE889E1245851D900773E33 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		ECE889E4245851D900773E33 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ECE889E6245851DB00773E33 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ECE889E9245851DB00773E33 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -72,15 +72,15 @@
 				ECE889DD245851D900773E33 /* SceneDelegate.h */,
 				ECE889DE245851D900773E33 /* SceneDelegate.m */,
 				ECE889E0245851D900773E33 /* ViewController.h */,
-				ECE889E1245851D900773E33 /* ViewController.m */,
+				EC16A7612474139900AFE379 /* ViewController.mm */,
 				ECE889F3245851F000773E33 /* PalindromeSolution.cpp */,
 				ECE889F4245851F000773E33 /* PalindromeSolution.hpp */,
 				ECE88A20245922A900773E33 /* SortSolution.h */,
 				ECE88A21245922A900773E33 /* SortSolution.mm */,
 				ECE889E3245851D900773E33 /* Main.storyboard */,
-				ECE889E6245851DB00773E33 /* Assets.xcassets */,
 				ECE889E8245851DB00773E33 /* LaunchScreen.storyboard */,
 				ECE889EB245851DB00773E33 /* Info.plist */,
+				ECE889E6245851DB00773E33 /* Assets.xcassets */,
 				ECE889EC245851DB00773E33 /* main.m */,
 			);
 			path = AlgorithmPractice;
@@ -144,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECE889EA245851DB00773E33 /* LaunchScreen.storyboard in Resources */,
+				EC16A7622474139900AFE379 /* ViewController.mm in Resources */,
 				ECE889E7245851DB00773E33 /* Assets.xcassets in Resources */,
 				ECE889E5245851D900773E33 /* Main.storyboard in Resources */,
 			);
@@ -157,7 +158,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECE889F5245851F000773E33 /* PalindromeSolution.cpp in Sources */,
-				ECE889E2245851D900773E33 /* ViewController.m in Sources */,
 				ECE889DC245851D900773E33 /* AppDelegate.m in Sources */,
 				ECE889ED245851DB00773E33 /* main.m in Sources */,
 				ECE88A22245922AA00773E33 /* SortSolution.mm in Sources */,

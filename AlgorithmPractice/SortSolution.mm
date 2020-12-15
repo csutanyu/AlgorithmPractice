@@ -54,6 +54,12 @@ void insertSort(int array[], int length) {
     }
 }
 
+// 归并排序
+
+void mergeSort(int array[], int length) {
+    
+}
+
 @implementation SortSolution
 
 @end

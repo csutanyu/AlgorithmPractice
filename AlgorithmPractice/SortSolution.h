@@ -26,6 +26,28 @@ FOUNDATION_EXTERN void selectSort(int array[], int length);
 FOUNDATION_EXTERN void insertSort(int array[], int length);
 
 
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+    
+    static ListNode* createList(int array[], int length) {
+        ListNode *list;
+        ListNode *lastNode;
+        for (int i = 0; i < length; ++i) {
+            ListNode *node = new ListNode(array[i]);
+            if (i == 0) {
+                lastNode = node;
+                list = node;
+            } else {
+                lastNode->next = node;
+                lastNode = node;
+            }
+        }
+        return list;
+    }
+};
+
 @interface SortSolution : NSObject
 
 @end
