@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "SortSolution.h"
 #import "LongestPalindrome.hpp"
+#import "PalindromeSolution.hpp"
 
 
 #include <string>
@@ -34,8 +35,12 @@ using namespace std;
 //    insertSort(array, sizeof(array)/sizeof(int));
 //
 //    int i = 0;
-    LongestPalindrome lp;
-    string x = lp.longestPalindrome("babad");
+//    LongestPalindrome lp;
+//    string x = lp.longestPalindrome("babad");
+    
+    LonestpalindromeSolution lp;
+    int x = lp.longestPalindromeSubseq("bbbab");
+    
     
     // Do any additional setup after loading the view.
 }
