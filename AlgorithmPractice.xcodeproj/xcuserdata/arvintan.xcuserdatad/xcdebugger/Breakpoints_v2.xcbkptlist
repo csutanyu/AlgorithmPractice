@@ -14,6 +14,7 @@
             filePath = "AlgorithmPractice/ViewController.mm"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
+<<<<<<< HEAD
             startingLineNumber = "77"
             endingLineNumber = "77"
             landmarkName = "-viewDidLoad"
@@ -32,6 +33,10 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "68"
             endingLineNumber = "68"
+=======
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+>>>>>>> 添加最长回文子串
             landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
