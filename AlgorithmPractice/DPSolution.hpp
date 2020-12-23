@@ -55,40 +55,16 @@ public:
             return 0;
         }
         
-        vector<vector<pair<int, int> > > dp(len, vector<pair<int, int> >(len, pair<int, int>(0, 0)));
-        vector<int> sum(len, 0);
-        for (int index = len - 1; index >= 0; --index) {
-            // 从i开始往后的序列之各
-            // 此处的index为石头序列的序号
-            sum[index] += (index + 1) < len ? (piles[index] + piles[index + 1]) :piles[index];
-            
-            // 只剩最后一堆时，先手可获得全部，后手可获得0
-            // 此处index为M数，无论M数为多少，只有最后一堆时，先手都获得全部
-            dp[len - 1][index] = pair<int, int>(piles[len - 1], 0);
-        }
-        
-//        // 只剩最后一堆时，先手可获得全部，后手可获得0
-//        for (int m = 0; m < len; ++len) {
-//            dp[len - 1][m] = pair<int, int>(piles[len - 1], 0);
-//        }
-        
-        vector<vector<int> > totalSum(len, vector<int>(0));
-        for (int i = len - 2; i >= 0; --i) { // 从后往前扫描
-            for (int m = 1; m <= len - i; ++m) { // 每次将M从1到总零数进行计算
-                for (int x = 1; x <= min(2 * m, len - 1) /* 先手可以获取的数量x为2m与剩余零数的较小值 */; ++x) {
-                    
-                    //求先手获得的子串合
-                    int s = 0;
-                    for (int t = i; i <= i + x - 1; ++t) {
-                        s += piles[t];
-                    }
-                    
-                    int first = s + dp[i + x][max(x, m)].second;
-                    int second = dp[i + x][max(x, m)].first;
-                    
-                    if (first > dp[i][m].first) {
-                        dp[i][m].first = first;
-                        dp[i][m].second = second;
+        vector<vector<int> > dp(len, vector<int>(len + 1, 0));
+        int sum = 0;
+        for (int i = len - 1; i >= 0; --i) { // 从后往前扫描
+            sum += piles[i];
+            for (int m = 1; m <= len; ++m) { // 每次将M从1到总零数进行计算
+                if (len - i <= 2 * m) {
+                    dp[i][m] = sum;
+                } else {
+                    for (int x = 1; x <= min(2 * m, len - 1) /* 先手可以获取的数量x为2m与剩余零数的较小值 */; ++x) {
+                        dp[i][m] = max(dp[i][m], sum - dp[i + x][max(x, m)]);
                     }
                 }
             }
@@ -96,7 +72,7 @@ public:
             
         }
         
-        return dp[0][0].first;
+        return dp[0][1];
     }
 };
 
