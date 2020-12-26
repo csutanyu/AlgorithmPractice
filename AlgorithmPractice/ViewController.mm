@@ -44,31 +44,17 @@ using namespace std;
     
     
     DPSolution dps;
+    //        [100,4,200,1,3,2]
+    vector<int> v;
+    v.push_back(100);
+    v.push_back(4);
+    v.push_back(200);
+    v.push_back(1);
+    v.push_back(3);
+    v.push_back(2);
     
-//    10
-//    [[1,2],[3,4],[5,6],[6,7],[8,9],[7,8]]
-    vector<vector<int> > dislikes(10, vector<int>(2, 0));
-    dislikes[0][0] = 1;
-    dislikes[0][1] = 2;
-    
-    dislikes[1][0] = 3;
-    dislikes[1][1] = 4;
-    
-    dislikes[2][0] = 5;
-    dislikes[2][1] = 6;
-    
-    dislikes[3][0] = 6;
-    dislikes[3][1] = 7;
-    
-    dislikes[4][0] = 8;
-    dislikes[4][1] = 9;
-    
-    dislikes[5][0] = 7;
-    dislikes[5][1] = 8;
-   
-    dps.possibleBipartition(10, dislikes);
-    
-    // Do any additional setup after loading the view.
+    int c = dps.longestConsecutive(v);
+    int x;
 }
 
 
