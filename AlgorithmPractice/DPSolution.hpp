@@ -231,7 +231,7 @@ public:
     int findCircleNum(vector<vector<int>>& M) {
         int N = (int)M.size();
         vector<int> parent(N, 0);
-        for (int i = 0; i <= N; ++i) {
+        for (int i = 0; i < N; ++i) {
             parent[i] = i;
         }
         
@@ -239,9 +239,16 @@ public:
         for (int i = 0; i < N; ++i) {
             for (int j = i + 1; j < N; ++j) {
                 if (M[i][j] == 1) {
-                    uf_union(parent, i, j);
-                    circles -= 1;
+                    if (uf_union(parent, i, j)) {
+                        circles -= 1;
+                    }
                 }
+                if (circles == 1) {
+                    break;
+                }
+            }
+            if (circles == 1) {
+                break;
             }
         }
         return circles;
