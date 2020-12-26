@@ -17,6 +17,10 @@
 #include <queue>
 #include <unordered_map>
 #include <unordered_set>
+#include <string>
+#include <sstream>
+#include <iostream>
+#include <iosfwd>
 
 using namespace std;
 
@@ -399,6 +403,135 @@ public:
             }
         }
         return true;
+    }
+};
+
+/**
+ 每年，政府都会公布一万个最常见的婴儿名字和它们出现的频率，也就是同名婴儿的数量。有些名字有多种拼法，例如，John 和 Jon 本质上是相同的名字，但被当成了两个名字公布出来。给定两个列表，一个是名字及对应的频率，另一个是本质相同的名字对。设计一个算法打印出每个真实名字的实际频率。注意，如果 John 和 Jon 是相同的，并且 Jon 和 Johnny 相同，则 John 与 Johnny 也相同，即它们有传递和对称性。
+
+ 在结果列表中，选择字典序最小的名字作为真实名字。
+
+ 示例：
+
+ 输入：names = ["John(15)","Jon(12)","Chris(13)","Kris(4)","Christopher(19)"], synonyms = ["(Jon,John)","(John,Johnny)","(Chris,Kris)","(Chris,Christopher)"]
+ 输出：["John(27)","Chris(36)"]
+ 提示：
+
+ names.length <= 100000
+
+ 来源：力扣（LeetCode）
+ 链接：https://leetcode-cn.com/problems/baby-names-lcci
+ 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+ */
+class TrulyMostPopularSolution {
+public:
+    vector<string> trulyMostPopular(vector<string>& names, vector<string>& synonyms) {
+        vector<string> desc;
+        unordered_map<string, string> parent;
+        
+        // 创建名字的并查集
+        for (string &str : synonyms) {
+            pair<string, string> namePairs = splitSynonymName(str);
+            uf_union(parent, namePairs.first, namePairs.second);
+        }
+        unordered_map<string, int> nameCountsMap;
+        for (string &name : names) {
+            int len = (int)name.length();
+            
+            // 查找到名字与数字的分割'('
+            int bracketBegin = 0;
+            for (int i = len - 2/*最后一个')'*/; i > 0; --i) {
+                if (name[i] == '(') {
+                    bracketBegin = i;
+                    break;
+                }
+            }
+            // 真实名字
+            string realName = name.substr(0, bracketBegin);
+            // 名字频率字串
+            string countStr = name.substr(bracketBegin + 1, len - bracketBegin - 2);
+            // 名字频率
+            int nameCount = std::stoi(countStr);
+            // 同义名字的频率只以其根为结果进行存储
+            string &rootName = uf_find(parent, realName);
+            
+            // 频率累加
+            if (0 != nameCountsMap.count(rootName)) {
+                nameCountsMap[rootName] = nameCount + nameCountsMap[rootName];
+            } else {
+                nameCountsMap[rootName] = nameCount;
+            }
+        }
+        
+        // dump名字频率率字典为字串
+        std::ostringstream stringStream;
+        for (auto itr = nameCountsMap.begin(); itr != nameCountsMap.end(); ++itr) {
+            stringStream << itr->first;
+            stringStream << "(";
+            stringStream << itr->second;
+            stringStream << ")";
+            desc.push_back(stringStream.str());
+            
+            // clear
+            stringStream.clear();
+            stringStream.str("");
+        }
+        
+        return desc;
+    }
+    
+    // 划分同义名字对
+    inline pair<string, string> splitSynonymName(string &x) {
+        size_t len = x.length();
+        int commaIndex = 0;
+        for (int i = 1/*第一个字符是'('*/; i < len - 1 /*最后一个字符为')'*/; ++i) {
+            if (x[i] == ',') {
+                commaIndex = i;
+                break;
+            }
+        }
+        string name1 = x.substr(1/*首'('*/, commaIndex - 1);
+        string name2 = x.substr(commaIndex + 1, len - (commaIndex + 1) - 1/*末尾'('*/ );
+        pair<string, string> names(name1, name2);
+        return names;
+    }
+    
+    string& uf_find(unordered_map<string, string> &parent, string &x) {
+        if ( 0 == parent.count(x) ) {
+            parent[x] = x;
+            return x;
+        }
+        
+        while ( parent.count(x) && parent[x].compare(x) != 0 ) {
+            parent[x] = parent[parent[x]];
+            x = parent[x];
+        }
+        
+        return x;
+    }
+    
+    bool uf_union(unordered_map<string, string> &parent, string &x, string &y) {
+        string &xRoot = uf_find(parent, x);
+        string &yRoot = uf_find(parent, y);
+        int cresult = xRoot.compare(yRoot);
+        if (cresult == 0) {
+            return false;
+        }
+        
+        if (cresult < 0) {
+            parent[yRoot] = xRoot;
+        } else {
+            parent[xRoot] = yRoot;
+        }
+        
+        return true;
+    }
+    
+    bool uf_connected(unordered_map<string, string> &parent, string &x, string &y) {
+        string &xRoot = parent[x];
+        string &yRoot = parent[y];
+        
+        return 0 == xRoot.compare(yRoot);
     }
 };
 
