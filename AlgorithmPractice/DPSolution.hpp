@@ -156,6 +156,40 @@ public:
         }
         return true;
     }
+    
+    bool possibleBipartition_unin_find(int N, vector<vector<int>>& dislikes) {
+        vector<int> parent(2*N + 1, 0);
+        for (int i = 0; i < 2*N + 1; ++i) {
+            parent[i] = i;
+        }
+        
+        for (int i = 0; i < dislikes.size(); ++i) {
+            int firstPerson = dislikes[i][0];
+            int secondPerson = dislikes[i][1];
+            
+            int firstLikeRoot = ufind(parent, firstPerson);
+            int secondLikeRoot = ufind(parent, secondPerson);
+            
+            if (firstLikeRoot == secondLikeRoot) {
+                return false;
+            }
+            
+            int firstHateRoot = ufind(parent, firstPerson + N);
+            int secondHateRoot = ufind(parent, secondPerson + N);
+            
+            parent[firstHateRoot] = secondLikeRoot;
+            parent[secondHateRoot] = firstPerson;
+        }
+        return true;
+    }
+    
+    int ufind(vector<int> &parent, int x) {
+        while (parent[x] != x) {
+            parent[x] = parent[parent[x]];
+            x = parent[x];
+        }
+        return x;
+    }
 };
 
 #endif /* DPSolution_hpp */
