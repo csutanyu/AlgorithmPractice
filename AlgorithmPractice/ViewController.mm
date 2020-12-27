@@ -57,11 +57,23 @@ using namespace std;
     
 //    ["c==c","b==d","x!=z"]
     
-    vector<string> equations;
-    equations.push_back("c==c");
-    equations.push_back("b==d");
-    equations.push_back("x!=z");
-    bool e = dps.equationsPossible(equations);
+//    vector<string> equations;
+//    equations.push_back("c==c");
+//    equations.push_back("b==d");
+//    equations.push_back("x!=z");
+//    bool e = dps.equationsPossible(equations);
+    
+    //[2,3,2]
+    vector<int> rooms;
+//    rooms.push_back(1);
+//    rooms.push_back(2);
+//    rooms.push_back(3);
+//    rooms.push_back(1);
+    rooms.push_back(0);
+    rooms.push_back(0);
+    Robber robber;
+    int theMost = robber.rob2(rooms);
+    
     int x;
 }
 
