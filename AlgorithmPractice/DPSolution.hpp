@@ -577,7 +577,7 @@ public:
         int preSum = nums[0];
         int curSum = max(nums[0], nums[1]);
         
-        for (int i = 2; i < len - 1; ++i) {
+        for (int i = 2; i < len; ++i) {
             int tempCur = max((preSum + nums[i]), curSum);
             preSum = curSum;
             curSum = tempCur;
