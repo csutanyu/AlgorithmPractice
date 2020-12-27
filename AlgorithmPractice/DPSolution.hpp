@@ -827,22 +827,13 @@ public:
      解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。
      */
     int maxProfit(vector<int>& prices) {
-        int size = (int) prices.size();
-        if (size < 2) return 0;
+        if (prices.size() == 0) return 0;
         
-        vector<int> minNum(prices.size(), 0);
-        minNum[0] = prices[0];
-        for (int i = 1; i < size; ++i) {
-            minNum[i] = min(prices[i], minNum[i - 1]);
-        }
-        
+        int minNum = prices[0];
         int theMax = 0;
-        for (int i = size - 1; i > 0; --i) {
-            int current = prices[i];
-            int preMin = minNum[i-1];
-            if (current > preMin) {
-               theMax = max(theMax, (current - preMin));
-            }
+        for (int i = 1; i < prices.size(); ++i) {
+            theMax = max(theMax, (prices[i] - minNum));
+            minNum = min(minNum, prices[i]);
         }
         return theMax;
     }
