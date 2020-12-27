@@ -572,19 +572,17 @@ public:
     int rob(vector<int>& nums) {
         int len = (int)nums.size();
         if (0 == len) return 0;
+        if (1 == len) return nums[0];
         
-        vector<int> sums(len, 0);
+        int preSum = nums[0];
+        int curSum = max(nums[0], nums[1]);
         
-        for (int index = len - 1; index >= 0; --index) {
-            if (index == len - 1) {
-                sums[index] = nums[index];
-            } else if (index == len - 2) {
-                sums[index] = max(nums[index], nums[index + 1]);
-            } else {
-                sums[index] = max( sums[index + 1], (nums[index] + sums[index + 2]) );
-            }
+        for (int i = 2; i < len - 1; ++i) {
+            int tempCur = max((preSum + nums[i]), curSum);
+            preSum = curSum;
+            curSum = tempCur;
         }
-        return sums[0];
+        return curSum;
     }
     
 };
