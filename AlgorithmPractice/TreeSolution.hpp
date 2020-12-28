@@ -332,6 +332,63 @@ public:
         
         return res;
     }
+    
+    /**
+     498. 对角线遍历
+     给定一个含有 M x N 个元素的矩阵（M 行，N 列），请以对角线遍历的顺序返回这个矩阵中的所有元素，对角线遍历如下图所示。
+
+      
+
+     示例:
+
+     输入:
+     [
+      [ 1, 2, 3 ],
+      [ 4, 5, 6 ],
+      [ 7, 8, 9 ]
+     ]
+
+     输出:  [1,2,4,7,5,3,6,8,9]
+     */
+    vector<int> findDiagonalOrder(vector<vector<int>>& matrix) {
+        vector<int> ret;
+        if (matrix.size() == 0) {
+            return  ret;
+        }
+        int M = (int)matrix.size();
+        int N = (int)matrix[0].size();
+        
+        int i = 0;
+        bool rowTrend = false; // true 递增， false递减
+        int j = 0;
+        while (i != M - 1 || j != N - 1 ) {
+            ret.push_back(matrix[i][j]);
+            
+            int nextI = i + (rowTrend ? 1 : -1);
+            int nextJ = j + (rowTrend ? -1 : 1);
+            if (nextI >= 0 && nextI < M && nextJ >= 0 && nextJ < N) {
+                continue;
+            }
+            
+            if (nextI == M - 1 && nextJ == N - 1) {
+                break;
+            }
+            
+            rowTrend = -rowTrend;
+            if (nextI >= 0 && nextI < M) {
+                i = i + (rowTrend ? 1 : -1);
+            }
+            if (nextJ >= 0 && nextJ < N) {
+                j = j + (rowTrend ? -1 : 1);
+            }
+        }
+        
+        
+        
+        
+        return ret;
+    }
+    
 };
 
 
