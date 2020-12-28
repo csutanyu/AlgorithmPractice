@@ -209,6 +209,33 @@ public:
         }
     }
     
+    // 通过修正的中序遍历实现
+    // pre存储前一个被遍历的节点。中节点只有在没有右子树或者右子树已经被访问过了(pre=node->right)才会从栈中弹出进行访问
+    void nonRecursionpostorderTraversalV2(vector<int>& res, TreeNode* root) {
+        if (root == NULL) {
+            return;
+        }
+        
+        stack<TreeNode *> tStack;
+        TreeNode * cur = root;
+        TreeNode * pre = NULL;
+        
+        while (!tStack.empty() || cur != NULL) {
+            if (cur != NULL) {
+                tStack.push(cur);
+                cur = cur->left;
+            } else {
+                TreeNode *top = tStack.top();
+                if (top->right == NULL || pre == top->right) {
+                    res.push_back(top->val);
+                    tStack.pop();
+                    pre = top;
+                } else if (top->right != NULL) {
+                    cur = top->right;
+                }
+            }
+        }
+    }
 };
 
 
