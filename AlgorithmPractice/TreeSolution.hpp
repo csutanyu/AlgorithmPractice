@@ -58,6 +58,22 @@ public:
         res.push_back(root->val);
         doInorderTraversalRecursion(res, root->right);
     }
+    
+    void doInorderTraversalNonRecursion(vector<int>& res, TreeNode* root) {
+        stack<TreeNode *> tStack;
+        TreeNode * cur = root;
+        while (!tStack.empty() || cur != NULL) {
+            if (cur != NULL) {
+                tStack.push(cur);
+                cur = cur->left;
+            } else {
+                TreeNode *top = tStack.top();
+                tStack.pop();
+                res.push_back(top->val);
+                cur = top->right;
+            }
+        }
+    }
 };
 
 
