@@ -180,6 +180,35 @@ public:
         res.push_back(root->val);
     }
     
+    void nonRecursionpostorderTraversal(vector<int>& res, TreeNode* root) {
+        if (root == NULL) return;
+        
+        stack<TreeNode *> tSt1;
+        stack<TreeNode *> tSt2;
+        
+        TreeNode *cur = root;
+        tSt1.push(root);
+        
+        while (!tSt1.empty()) {
+            cur = tSt1.top();
+            tSt1.pop();
+            tSt2.push(cur);
+            
+            if (cur->left != NULL) {
+                tSt1.push(cur->left);
+            }
+            if (cur->right != NULL) {
+                tSt1.push(cur->right);
+            }
+        }
+        
+        while (!tSt2.empty()) {
+            cur = tSt2.top();
+            tSt2.pop();
+            res.push_back(cur->val);
+        }
+    }
+    
 };
 
 
