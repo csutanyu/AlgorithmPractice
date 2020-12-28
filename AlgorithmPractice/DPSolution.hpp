@@ -9,6 +9,7 @@
 #ifndef DPSolution_hpp
 #define DPSolution_hpp
 
+#include "TreeSolution.hpp"
 #include <stdio.h>
 #include <string>
 #include <vector>
@@ -686,12 +687,6 @@ public:
  链接：https://leetcode-cn.com/problems/house-robber-iii
  著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
- struct TreeNode {
-     int val;
-     TreeNode *left;
-     TreeNode *right;
-     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- };
 
 class RobberSolution3 {
     unordered_map <TreeNode*, int> dp;

@@ -11,6 +11,7 @@
 #import "LongestPalindrome.hpp"
 #import "PalindromeSolution.hpp"
 #import "DPSolution.cpp"
+#import "TreeSolution.hpp"
 
 
 #include <string>
@@ -76,22 +77,36 @@ using namespace std;
     
     
     
-    MaxProfitSolution mps;
+//    MaxProfitSolution mps;
 //    2
 //    [1,2,4,2,5,7,2,4,9,0]
-    vector<int>  prices;
-    prices.push_back(1);
-    prices.push_back(2);
-    prices.push_back(4);
-    prices.push_back(2);
-    prices.push_back(5);
-    prices.push_back(7);
-    prices.push_back(2);
-    prices.push_back(4);
-    prices.push_back(9);
-    prices.push_back(0);
+//    vector<int>  prices;
+//    prices.push_back(1);
+//    prices.push_back(2);
+//    prices.push_back(4);
+//    prices.push_back(2);
+//    prices.push_back(5);
+//    prices.push_back(7);
+//    prices.push_back(2);
+//    prices.push_back(4);
+//    prices.push_back(9);
+//    prices.push_back(0);
+//
+//    int maxProfit = mps.maxProfit_IV(2, prices);
     
-    int maxProfit = mps.maxProfit_IV(2, prices);
+    TreeSolution treeSolution;
+    TreeNode *n3 = new TreeNode();
+    n3->val = 3;
+    
+    TreeNode *n2 = new TreeNode();
+    n2->val = 2;
+    n2->left = n3;
+    
+    TreeNode *root = new TreeNode();
+    root->val = 1;
+    root->right = n2;
+    
+    vector<int> res = treeSolution.inorderTraversal(root);
     
     int x;
 }
