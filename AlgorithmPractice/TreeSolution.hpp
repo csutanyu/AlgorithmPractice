@@ -236,6 +236,56 @@ public:
             }
         }
     }
+    
+    /**
+     102. 二叉树的层序遍历
+     
+     给你一个二叉树，请你返回其按 层序遍历 得到的节点值。 （即逐层地，从左到右访问所有节点）。
+
+      
+
+     示例：
+     二叉树：[3,9,20,null,null,15,7],
+
+         3
+        / \
+       9  20
+         /  \
+        15   7
+     返回其层序遍历结果：
+
+     [
+       [3],
+       [9,20],
+       [15,7]
+     ]
+     */
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        vector<vector<int>> res;
+        if (root == NULL) {
+            return res;
+        }
+        queue<pair<TreeNode *, int> > nodeQueue;
+        nodeQueue.push(pair<TreeNode *, int>(root, 0));
+        while (!nodeQueue.empty()) {
+            pair<TreeNode *, int> &current = nodeQueue.front();
+            if (current.first->left != NULL) {
+                nodeQueue.push(pair<TreeNode *, int>(current.first->left, current.second + 1));
+            }
+            if (current.first->right != NULL) {
+                nodeQueue.push(pair<TreeNode *, int>(current.first->right, current.second + 1));
+            }
+            while(res.size() < current.second + 1) {
+                res.push_back(vector<int>());
+            }
+            
+            res[current.second].push_back(current.first->val);
+            
+            nodeQueue.pop();
+        }
+        return res;
+    }
+    
 };
 
 
