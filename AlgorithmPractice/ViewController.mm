@@ -106,7 +106,7 @@ using namespace std;
     root->val = 1;
     root->right = n2;
     
-    vector<int> res = treeSolution.inorderTraversal(root);
+    vector<int> res = treeSolution.preorderTraversal(root);
     
     int x;
 }

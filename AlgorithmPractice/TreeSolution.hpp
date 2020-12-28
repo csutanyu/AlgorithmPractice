@@ -117,7 +117,7 @@ public:
      */
     vector<int> preorderTraversal(TreeNode* root) {
         vector<int> res;
-        recursionPreorderTraversal(res, root);
+        nonRecursionPreorderTraversal(res, root);
         return res;
     }
     
@@ -127,6 +127,24 @@ public:
         res.push_back(root->val);
         recursionPreorderTraversal(res, root->left);
         recursionPreorderTraversal(res, root->right);
+    }
+    
+    void nonRecursionPreorderTraversal(vector<int> &res, TreeNode* root) {
+        if (root == NULL) return;
+        
+        stack<TreeNode *> tStack;
+        tStack.push(root);
+        while (!tStack.empty()) {
+            TreeNode *top = tStack.top();
+            tStack.pop();
+            res.push_back(top->val);
+            if (top->right != NULL) {
+                tStack.push(top->right);
+            }
+            if (top->left) {
+                tStack.push(top->left);
+            }
+        }
     }
 };
 
