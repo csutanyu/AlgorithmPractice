@@ -265,23 +265,22 @@ public:
         if (root == NULL) {
             return res;
         }
-        queue<pair<TreeNode *, int> > nodeQueue;
-        nodeQueue.push(pair<TreeNode *, int>(root, 0));
+        queue<TreeNode * > nodeQueue;
+        nodeQueue.push(root);
         while (!nodeQueue.empty()) {
-            pair<TreeNode *, int> &current = nodeQueue.front();
-            if (current.first->left != NULL) {
-                nodeQueue.push(pair<TreeNode *, int>(current.first->left, current.second + 1));
+            res.push_back(vector<int>());
+            size_t currentLevelSize = nodeQueue.size();
+            for (int i = 0; i < currentLevelSize; ++i) {
+                TreeNode *current = nodeQueue.front();
+                res.back().push_back(current->val);
+                nodeQueue.pop();
+                if (current->left != NULL) {
+                    nodeQueue.push(current->left);
+                }
+                if (current->right != NULL) {
+                    nodeQueue.push(current->right);
+                }
             }
-            if (current.first->right != NULL) {
-                nodeQueue.push(pair<TreeNode *, int>(current.first->right, current.second + 1));
-            }
-            while(res.size() < current.second + 1) {
-                res.push_back(vector<int>());
-            }
-            
-            res[current.second].push_back(current.first->val);
-            
-            nodeQueue.pop();
         }
         return res;
     }
