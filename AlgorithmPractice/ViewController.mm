@@ -64,15 +64,34 @@ using namespace std;
 //    bool e = dps.equationsPossible(equations);
     
     //[2,3,2]
-    vector<int> rooms;
+//    vector<int> rooms;
 //    rooms.push_back(1);
 //    rooms.push_back(2);
 //    rooms.push_back(3);
 //    rooms.push_back(1);
-    rooms.push_back(0);
-    rooms.push_back(0);
-    Robber robber;
-    int theMost = robber.rob2(rooms);
+//    rooms.push_back(0);
+//    rooms.push_back(0);
+//    Robber robber;
+//    int theMost = robber.rob2(rooms);
+    
+    
+    
+    MaxProfitSolution mps;
+//    2
+//    [1,2,4,2,5,7,2,4,9,0]
+    vector<int>  prices;
+    prices.push_back(1);
+    prices.push_back(2);
+    prices.push_back(4);
+    prices.push_back(2);
+    prices.push_back(5);
+    prices.push_back(7);
+    prices.push_back(2);
+    prices.push_back(4);
+    prices.push_back(9);
+    prices.push_back(0);
+    
+    int maxProfit = mps.maxProfit_IV(2, prices);
     
     int x;
 }
