@@ -94,6 +94,9 @@ using namespace std;
 //
 //    int maxProfit = mps.maxProfit_IV(2, prices);
     
+    string str("a");
+    string subs = str.substr(5, str.length() - 1);
+    
     TreeSolution treeSolution;
     TreeNode *n3 = new TreeNode();
     n3->val = 3;
