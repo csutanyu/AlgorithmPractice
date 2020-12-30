@@ -1079,8 +1079,8 @@ public:
     bool regexMatchRecursion(string &s, string &p) {
         size_t lenS = s.length();
         size_t lenP = p.length();
-        if (lenS == 0) {
-            return lenP == 0;
+        if (lenP == 0) {
+            return lenS == 0;
         }
         
         bool firstMatch = lenS != 0 && (s[0] == p[0] || p[0] == '.');

@@ -77,7 +77,7 @@ using namespace std;
     
     
     
-//    MaxProfitSolution mps;
+    MaxProfitSolution mps;
 //    2
 //    [1,2,4,2,5,7,2,4,9,0]
 //    vector<int>  prices;
@@ -93,9 +93,9 @@ using namespace std;
 //    prices.push_back(0);
 //
 //    int maxProfit = mps.maxProfit_IV(2, prices);
+    bool x = mps.regexMatch("aa", "a*");
     
-    string str("a");
-    string subs = str.substr(5, str.length() - 1);
+   
     
     TreeSolution treeSolution;
     TreeNode *n3 = new TreeNode();
@@ -111,7 +111,6 @@ using namespace std;
     
     vector<int> res = treeSolution.preorderTraversal(root);
     
-    int x;
 }
 
 
