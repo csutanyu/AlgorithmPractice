@@ -117,33 +117,26 @@ public:
      输入: 1->2->3->4->5->NULL, m = 2, n = 4
      输出: 1->4->3->2->5->NULL
      */
+    ListNode* successor;
     ListNode* reverseBetween(ListNode* head, int m, int n) {
-        ListNode *beforeBegin = head;
-        int ignoreFirstCount = m - 2;
-        while (ignoreFirstCount > 0) {
-            beforeBegin = beforeBegin->next;
-            --ignoreFirstCount;
+        if (m == 1) {
+            return reverseFrontN(head, n);
         }
-        
-        ListNode *cur = beforeBegin->next;
-        ListNode *pre = cur->next;
-        
-        int reverseCount = n - m;
-        while (reverseCount > 0) {
-            ListNode *temp = pre->next;
-            pre->next = cur;
-            cur = pre;
-            pre = temp;
-            
-            --reverseCount;
-        }
-        
-        beforeBegin->next->next = cur;
-        beforeBegin->next = pre;
-        
+        ListNode* last = reverseBetween(head->next, m-1, n-1);
+        head->next = last;
         return head;
     }
     
+    ListNode* reverseFrontN(ListNode* head, int n) {
+        if (n == 1) {
+            successor = head->next;
+            return head;
+        }
+        ListNode* last = reverseFrontN(head->next, n-1);
+        head->next->next = head;
+        head->next = successor;
+        return last;
+    }
 };
 
 #endif /* LinkedListSolution_hpp */
