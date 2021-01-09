@@ -1200,16 +1200,32 @@ public:
             if (parents.count(x) == 0) { // 还没有在并查集中
                 parents[x] = x;
                 weights[x] = 1.0;
-                
-                return x;
             }
-            
+            /**
+             自己用栈，比递归要耗时长，在leetcode中超时
+             */
+#if 0
+            stack<string> stk;
+            string temp = x;
+            while (parents[temp].compare(temp) != 0) {
+                stk.push(temp);
+                temp = parents[temp];
+            }
+            while (!stk.empty()) {
+                temp = stk.top();
+                string &originParent = parents[temp];
+                parents[temp] = parents[originParent];
+                weights[temp] = weights[temp] * weights[originParent];
+            }
+#else
+            // 递归
             if (parents[x].compare(x) != 0) {
                 string originParent = parents[x];
                 string root = find(originParent);
                 parents[x] = root;
                 weights[x] = weights[originParent] * weights[x];
             }
+#endif
             return parents[x];
         }
         
@@ -1222,6 +1238,13 @@ public:
             
             parents[rootx] = rooty;
             weights[rootx] = (weights[y] * value) / weights[x];
+            
+            // 这里明显x的parent不是根，则将其指向根
+            // 根据find的定义，rootx就是x的parent, 以下的if语句应该总是成立才对，但是如果不要if语句，则leetcode会判为错误，不知为何？
+            if (parents[x].compare(rootx) == 0) {
+                parents[x] = rooty;
+                weights[x] = weights[x] * weights[rootx];
+            }
         }
         
         double connected(string &x, string &y) {
