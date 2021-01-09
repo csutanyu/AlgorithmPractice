@@ -1265,10 +1265,10 @@ public:
         for (size_t i = 0; i < n; ++i) {
             string &var1 = equations[i][0];
             string &var2 = equations[i][1];
-            if (variables.find(var1) != variables.end()) {
+            if (variables.find(var1) == variables.end()) {
                 variables[var1] = nvars++;
             }
-            if (variables.find(var2) != variables.end()) {
+            if (variables.find(var2) == variables.end()) {
                 variables[var2] = nvars++;
             }
         }
@@ -1308,6 +1308,7 @@ public:
                 for (const pair<int, double> &adjoin : edges[current]) {
                     if (weights[adjoin.first] < 0) { // 从当前var1出发没有访问过
                         weights[adjoin.first] = adjoin.second * weights[current];
+                        points.push(adjoin.second);
                     }
                 }
             }
