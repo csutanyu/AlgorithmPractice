@@ -22,6 +22,7 @@
 #include <sstream>
 #include <iostream>
 #include <iosfwd>
+#include <float.h>
 
 using namespace std;
 
@@ -1256,6 +1257,64 @@ public:
             return weights[x] / weights[y];
         }
     };
+    
+    vector<double> calcEquationWFS(vector<vector<string>>& equations, vector<double>& values, vector<vector<string>>& queries) {
+        unordered_map<string, int> variables;
+        int nvars = 0;
+        size_t n = equations.size();
+        for (size_t i = 0; i < n; ++i) {
+            string &var1 = equations[i][0];
+            string &var2 = equations[i][1];
+            if (variables.find(var1) != variables.end()) {
+                variables[var1] = nvars++;
+            }
+            if (variables.find(var2) != variables.end()) {
+                variables[var2] = nvars++;
+            }
+        }
+        
+        vector<vector<pair<int, double>>> edges(nvars);
+        for (size_t i = 0; i < n; ++i) {
+            int var1 = variables[equations[i][0]];
+            int var2 = variables[equations[i][1]];
+            edges[var1].push_back(make_pair(var2, values[i]));
+            edges[var2].push_back(make_pair(var1, (1.0/values[i])));
+        }
+        
+        n = queries.size();
+        vector<double> ret(n, -1);
+        for (size_t i = 0; i < n; ++i) {
+            string &varName1 = queries[i][0];
+            string &varName2 = queries[i][1];
+            if (variables.find(varName1) == variables.end() || variables.find(varName2) == variables.end()) {
+                ret[i] = -1;
+                continue;;
+            }
+            
+            int var1 = variables[varName1];
+            int var2 = variables[varName2];
+            if (var1 == var2) {
+                ret[i] = 1.0;
+                continue;
+            }
+            
+            queue<int> points;
+            points.push(var1);
+            vector<double> weights(nvars, -1); // 以当前var1点开始，到所有其他点连通点的累积权值
+            weights[var1] = 1.0; // 自己到自己的可能会为1.0
+            while (!points.empty() && weights[var2] < 0) {
+                int current =  points.front();
+                points.pop();
+                for (const pair<int, double> &adjoin : edges[current]) {
+                    if (weights[adjoin.first] < 0) { // 从当前var1出发没有访问过
+                        weights[adjoin.first] = adjoin.second * weights[current];
+                    }
+                }
+            }
+            ret[i] = weights[var2];
+        }
+        return ret;
+    }
 };
 
 #endif /* DPSolution_hpp */
