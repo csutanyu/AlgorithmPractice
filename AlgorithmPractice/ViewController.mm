@@ -12,7 +12,7 @@
 #import "PalindromeSolution.hpp"
 #import "DPSolution.cpp"
 #import "TreeSolution.hpp"
-
+#import "Algorithms4Chapter1.hpp"
 
 #include <string>
 #include <vector>
@@ -93,23 +93,27 @@ using namespace std;
 //    prices.push_back(0);
 //
 //    int maxProfit = mps.maxProfit_IV(2, prices);
-    bool x = mps.regexMatch("aa", "a*");
     
-   
+//    bool x = mps.regexMatch("aa", "a*");
+//
+//
+//
+//    TreeSolution treeSolution;
+//    TreeNode *n3 = new TreeNode();
+//    n3->val = 3;
+//
+//    TreeNode *n2 = new TreeNode();
+//    n2->val = 2;
+//    n2->left = n3;
+//
+//    TreeNode *root = new TreeNode();
+//    root->val = 1;
+//    root->right = n2;
+//
+//    vector<int> res = treeSolution.preorderTraversal(root);
     
-    TreeSolution treeSolution;
-    TreeNode *n3 = new TreeNode();
-    n3->val = 3;
-    
-    TreeNode *n2 = new TreeNode();
-    n2->val = 2;
-    n2->left = n3;
-    
-    TreeNode *root = new TreeNode();
-    root->val = 1;
-    root->right = n2;
-    
-    vector<int> res = treeSolution.preorderTraversal(root);
+    CalculatorSolution cs;
+    int res = cs.calculate("1*2-3/4+5*6-7*8+9/10");
     
 }
 
