@@ -1316,6 +1316,55 @@ public:
         }
         return ret;
     }
+    
+    vector<double> calcEquationFloyd(vector<vector<string>>& equations, vector<double>& values, vector<vector<string>>& queries) {
+        size_t n = equations.size();
+        int nvars = 0;
+        unordered_map<string, int> variables;
+        for (int i = 0; i < n; ++i) {
+            string &va = equations[i][0];
+            string &vb = equations[i][1];
+            if (variables.find(va) == variables.end()) {
+                variables[va] = nvars++;
+            }
+            if (variables.find(vb) == variables.end()) {
+                variables[vb] = nvars++;
+            }
+        }
+        
+        vector<vector<double>> graph(nvars, vector<double>(nvars, -1.0));
+        for (int i = 0; i < n; ++i) {
+            int va = variables[equations[i][0]];
+            int vb = variables[equations[i][1]];
+            graph[va][vb] = values[i];
+            graph[vb][va] = 1.0/values[i];
+        }
+        
+        for (int k = 0; k < nvars; ++k) {
+            for (int i = 0; i < nvars; ++i) {
+                for (int j = 0; j < nvars; ++j) {
+                    if (graph[i][k] > 0 && graph[k][j] > 0) {
+                        graph[i][j] = graph[i][k] * graph[k][j];
+                    }
+                }
+            }
+        }
+        
+        vector<double> ret;
+        
+        for (const auto& q: queries) {
+            double result = -1;
+            if (variables.find(q[0]) != variables.end() && variables.find(q[1]) != variables.end()) {
+                int va = variables[q[0]];
+                int vb = variables[q[1]];
+                if (graph[va][vb] > 0) {
+                    result = graph[va][vb];
+                }
+            }
+            ret.push_back(result);
+        }
+        return ret;
+    }
 };
 
 #endif /* DPSolution_hpp */
