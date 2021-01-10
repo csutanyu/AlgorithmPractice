@@ -1435,5 +1435,4 @@ public:
         return ret;
     }
 };
-};
 #endif /* DPSolution_hpp */
