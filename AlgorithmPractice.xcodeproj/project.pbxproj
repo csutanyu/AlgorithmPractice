@@ -10,6 +10,7 @@
 		EC38418C25AC70A000441124 /* LeetCodeCommons.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EC38418A25AC70A000441124 /* LeetCodeCommons.cpp */; };
 		EC38419025AC831B00441124 /* LeetCodeSwiftCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC38418F25AC831B00441124 /* LeetCodeSwiftCommon.swift */; };
 		EC62C7512588E18800B5F95E /* LongestPalindrome.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EC62C7502588E18800B5F95E /* LongestPalindrome.cpp */; };
+		EC973C5325AAE5B100CF228A /* Algorithms4Chapter1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EC973C5125AAE5B100CF228A /* Algorithms4Chapter1.cpp */; };
 		EC9E8038259978810012E3B9 /* TreeSolution.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EC9E8036259978810012E3B9 /* TreeSolution.cpp */; };
 		ECA8439B25924113001EB974 /* DPSolution.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECA8439925924113001EB974 /* DPSolution.cpp */; };
 		ECD42287259DF2D000377848 /* LinkedListSolution.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECD42285259DF2D000377848 /* LinkedListSolution.cpp */; };
@@ -31,6 +32,8 @@
 		EC38418F25AC831B00441124 /* LeetCodeSwiftCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeSwiftCommon.swift; sourceTree = "<group>"; };
 		EC62C74F2588E18700B5F95E /* LongestPalindrome.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LongestPalindrome.hpp; sourceTree = "<group>"; };
 		EC62C7502588E18800B5F95E /* LongestPalindrome.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LongestPalindrome.cpp; sourceTree = "<group>"; };
+		EC973C5125AAE5B100CF228A /* Algorithms4Chapter1.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Algorithms4Chapter1.cpp; sourceTree = "<group>"; };
+		EC973C5225AAE5B100CF228A /* Algorithms4Chapter1.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Algorithms4Chapter1.hpp; sourceTree = "<group>"; };
 		EC9E8036259978810012E3B9 /* TreeSolution.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TreeSolution.cpp; sourceTree = "<group>"; };
 		EC9E8037259978810012E3B9 /* TreeSolution.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TreeSolution.hpp; sourceTree = "<group>"; };
 		ECA8439925924113001EB974 /* DPSolution.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DPSolution.cpp; sourceTree = "<group>"; };
@@ -66,6 +69,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EC973C4F25AAE56400CF228A /* Algrithms4th */ = {
+			isa = PBXGroup;
+			children = (
+				EC973C5025AAE57E00CF228A /* Chapter1 */,
+			);
+			path = Algrithms4th;
+			sourceTree = "<group>";
+		};
+		EC973C5025AAE57E00CF228A /* Chapter1 */ = {
+			isa = PBXGroup;
+			children = (
+				EC973C5125AAE5B100CF228A /* Algorithms4Chapter1.cpp */,
+				EC973C5225AAE5B100CF228A /* Algorithms4Chapter1.hpp */,
+			);
+			path = Chapter1;
+			sourceTree = "<group>";
+		};
 		ECE889CE245851D900773E33 = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +105,7 @@
 		ECE889D9245851D900773E33 /* AlgorithmPractice */ = {
 			isa = PBXGroup;
 			children = (
+				EC973C4F25AAE56400CF228A /* Algrithms4th */,
 				ECE889DA245851D900773E33 /* AppDelegate.h */,
 				ECE889DB245851D900773E33 /* AppDelegate.m */,
 				ECE889DD245851D900773E33 /* SceneDelegate.h */,
@@ -193,6 +214,7 @@
 				ECE889F5245851F000773E33 /* PalindromeSolution.cpp in Sources */,
 				EC9E8038259978810012E3B9 /* TreeSolution.cpp in Sources */,
 				ECE889E2245851D900773E33 /* ViewController.mm in Sources */,
+				EC973C5325AAE5B100CF228A /* Algorithms4Chapter1.cpp in Sources */,
 				ECE889DC245851D900773E33 /* AppDelegate.m in Sources */,
 				ECE889ED245851DB00773E33 /* main.m in Sources */,
 				ECD42287259DF2D000377848 /* LinkedListSolution.cpp in Sources */,
