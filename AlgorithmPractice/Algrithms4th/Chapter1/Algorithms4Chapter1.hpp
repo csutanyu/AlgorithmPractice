@@ -211,6 +211,60 @@ public:
         }
         return make_pair(ret, begin);
     }
+    
+    /**
+     227. 基本计算器 II
+     */
+    int calculateIIV2(string s) {
+        int ret = 0;
+        stack<int> nums;
+        size_t n = s.length();
+        int i = 0;
+        char lastOp = '+';
+        while (i < n) {
+            if (isspace(s[i])) {
+                ++i;
+                continue;
+            }
+            if (isdigit(s[i])) {
+                int temp = 0;
+                while (isdigit(s[i])) {
+                    temp = temp * 10 + (int)(s[i] - '0');
+                    ++i;
+                }
+                if (lastOp == '+') {
+                    nums.push(temp);
+                } else if (lastOp == '-') {
+                    nums.push(-temp);
+                } else {
+                    int calResult = calculateTwoNums(lastOp, nums.top(), temp);
+                    nums.pop();
+                    nums.push(calResult);
+                }
+            } else {
+                lastOp = s[i];
+                ++i;
+            }
+        }
+        while (!nums.empty()) {
+            ret += nums.top();
+            nums.pop();
+        }
+        
+        return ret;
+    }
+    
+    inline int calculateTwoNums(char &op, int &x, int &y) {
+        if (op == '*') {
+            return x * y;
+        } else if (op == '/') {
+            return x / y;
+        } else if (op == '+') {
+            return x + y;
+        } else {
+            return x - y;
+        }
+    }
 };
 
 #endif /* Algorithms4Chapter1_hpp */

@@ -113,8 +113,8 @@ using namespace std;
 //    vector<int> res = treeSolution.preorderTraversal(root);
     
     CalculatorSolution cs;
-    int res = cs.calculate("1*2-3/4+5*6-7*8+9/10");
-    
+//    int res = cs.calculate("1*2-3/4+5*6-7*8+9/10");
+    int res = cs.calculateIIV2("3+2*2");
 }
 
 
