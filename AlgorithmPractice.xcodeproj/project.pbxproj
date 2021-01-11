@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC38418C25AC70A000441124 /* LeetCodeCommons.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EC38418A25AC70A000441124 /* LeetCodeCommons.cpp */; };
 		EC62C7512588E18800B5F95E /* LongestPalindrome.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EC62C7502588E18800B5F95E /* LongestPalindrome.cpp */; };
 		EC9E8038259978810012E3B9 /* TreeSolution.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EC9E8036259978810012E3B9 /* TreeSolution.cpp */; };
 		ECA8439B25924113001EB974 /* DPSolution.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECA8439925924113001EB974 /* DPSolution.cpp */; };
@@ -23,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EC38418A25AC70A000441124 /* LeetCodeCommons.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LeetCodeCommons.cpp; sourceTree = "<group>"; };
+		EC38418B25AC70A000441124 /* LeetCodeCommons.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LeetCodeCommons.hpp; sourceTree = "<group>"; };
 		EC62C74F2588E18700B5F95E /* LongestPalindrome.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LongestPalindrome.hpp; sourceTree = "<group>"; };
 		EC62C7502588E18800B5F95E /* LongestPalindrome.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LongestPalindrome.cpp; sourceTree = "<group>"; };
 		EC9E8036259978810012E3B9 /* TreeSolution.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TreeSolution.cpp; sourceTree = "<group>"; };
@@ -97,6 +100,8 @@
 				EC62C7502588E18800B5F95E /* LongestPalindrome.cpp */,
 				ECA8439925924113001EB974 /* DPSolution.cpp */,
 				ECA8439A25924113001EB974 /* DPSolution.hpp */,
+				EC38418A25AC70A000441124 /* LeetCodeCommons.cpp */,
+				EC38418B25AC70A000441124 /* LeetCodeCommons.hpp */,
 				ECE889E3245851D900773E33 /* Main.storyboard */,
 				ECE889E8245851DB00773E33 /* LaunchScreen.storyboard */,
 				ECE889EB245851DB00773E33 /* Info.plist */,
@@ -177,6 +182,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC38418C25AC70A000441124 /* LeetCodeCommons.cpp in Sources */,
 				ECA8439B25924113001EB974 /* DPSolution.cpp in Sources */,
 				EC62C7512588E18800B5F95E /* LongestPalindrome.cpp in Sources */,
 				ECE889F5245851F000773E33 /* PalindromeSolution.cpp in Sources */,
