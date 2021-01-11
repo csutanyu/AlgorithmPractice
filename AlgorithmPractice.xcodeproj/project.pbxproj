@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EC38418C25AC70A000441124 /* LeetCodeCommons.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EC38418A25AC70A000441124 /* LeetCodeCommons.cpp */; };
+		EC38419025AC831B00441124 /* LeetCodeSwiftCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC38418F25AC831B00441124 /* LeetCodeSwiftCommon.swift */; };
 		EC62C7512588E18800B5F95E /* LongestPalindrome.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EC62C7502588E18800B5F95E /* LongestPalindrome.cpp */; };
 		EC9E8038259978810012E3B9 /* TreeSolution.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EC9E8036259978810012E3B9 /* TreeSolution.cpp */; };
 		ECA8439B25924113001EB974 /* DPSolution.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECA8439925924113001EB974 /* DPSolution.cpp */; };
@@ -26,6 +27,8 @@
 /* Begin PBXFileReference section */
 		EC38418A25AC70A000441124 /* LeetCodeCommons.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LeetCodeCommons.cpp; sourceTree = "<group>"; };
 		EC38418B25AC70A000441124 /* LeetCodeCommons.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LeetCodeCommons.hpp; sourceTree = "<group>"; };
+		EC38418E25AC831B00441124 /* AlgorithmPractice-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AlgorithmPractice-Bridging-Header.h"; sourceTree = "<group>"; };
+		EC38418F25AC831B00441124 /* LeetCodeSwiftCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeSwiftCommon.swift; sourceTree = "<group>"; };
 		EC62C74F2588E18700B5F95E /* LongestPalindrome.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LongestPalindrome.hpp; sourceTree = "<group>"; };
 		EC62C7502588E18800B5F95E /* LongestPalindrome.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LongestPalindrome.cpp; sourceTree = "<group>"; };
 		EC9E8036259978810012E3B9 /* TreeSolution.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TreeSolution.cpp; sourceTree = "<group>"; };
@@ -107,6 +110,8 @@
 				ECE889EB245851DB00773E33 /* Info.plist */,
 				ECE889E6245851DB00773E33 /* Assets.xcassets */,
 				ECE889EC245851DB00773E33 /* main.m */,
+				EC38418F25AC831B00441124 /* LeetCodeSwiftCommon.swift */,
+				EC38418E25AC831B00441124 /* AlgorithmPractice-Bridging-Header.h */,
 			);
 			path = AlgorithmPractice;
 			sourceTree = "<group>";
@@ -193,6 +198,7 @@
 				ECD42287259DF2D000377848 /* LinkedListSolution.cpp in Sources */,
 				ECE88A22245922AA00773E33 /* SortSolution.mm in Sources */,
 				ECE889DF245851D900773E33 /* SceneDelegate.m in Sources */,
+				EC38419025AC831B00441124 /* LeetCodeSwiftCommon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +347,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tencent.AlgorithmPractice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "AlgorithmPractice/AlgorithmPractice-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -360,6 +367,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tencent.AlgorithmPractice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "AlgorithmPractice/AlgorithmPractice-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
