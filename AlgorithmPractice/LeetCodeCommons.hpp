@@ -108,6 +108,39 @@ public:
         return ret;
     }
     
+    string smallestStringWithSwapsV2(string s, vector<vector<int>>& pairs) {
+        int len = (int)s.length();
+        
+        // 初始化并查集
+        vector<int> parent(len, 0);
+        for (int i = 0; i < len; ++i) {
+            parent[i] = i;
+        }
+        
+        // 构造并查集
+        for (vector<int> &pair : pairs) {
+            uf_union(parent, pair[0], pair[1]);
+        }
+         
+        unordered_map<int/*index*/, priority_queue<char, vector<char>, greater<char> > > hasMap;
+        for (int i = 0; i < len; ++i) {
+            int root = uf_find(parent, i);
+            if (!hasMap.count(root)) {
+                hasMap[root] = priority_queue<char, vector<char>, greater<char> >();
+            }
+            hasMap[root].push(s[i]);
+        }
+        
+        ostringstream ostream;
+        for (int i = 0; i < len; ++i) {
+            int root = uf_find(parent, i);
+            ostream << hasMap[root].top();
+            hasMap[root].pop();
+        }
+        string ret = ostream.str();
+        return ret;
+    }
+    
     int uf_find(vector<int> &parent, int x) {
         while (parent[x] != x) {
             parent[x] = parent[parent[x]];
