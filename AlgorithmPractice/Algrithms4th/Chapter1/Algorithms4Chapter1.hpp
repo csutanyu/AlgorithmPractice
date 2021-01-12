@@ -353,12 +353,14 @@ public:
         for (; i < s.length(); ++i) {
             if (isdigit(s[i])) {
                 num = num * 10 + (s[i] - '0');
-            } else if (s[i] == '(') {
+            }
+            if (s[i] == '(') {
                 ++i;
                 num = helper(s, i);
+                ++i;
             }
             
-            if (!isdigit(s[i]) || i == s.length() - 1) {
+            if ((!isdigit(s[i]) && s[i] != ' ') || i == s.length() - 1) {
                 if (preOp == '+') {
                     stk.push(num);
                 } else if (preOp == '-') {
@@ -377,7 +379,7 @@ public:
                 preOp = s[i];
                 num = 0;
             }
-        
+            
             if(s[i] == ')'){
                 break;
             }
