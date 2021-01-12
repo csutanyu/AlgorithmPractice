@@ -265,6 +265,132 @@ public:
             return x - y;
         }
     }
+    
+    /**
+     772. 基本计算器 III
+     实现一个基本的计算器来计算简单的表达式字符串。
+
+     表达式字符串只包含非负整数， +, -, *, / 操作符，左括号 ( ，右括号 )和空格 。整数除法需要向下截断。
+
+     你可以假定给定的字符串总是有效的。所有的中间结果的范围为 [-2147483648, 2147483647]。
+
+     进阶：你可以在不使用内置库函数的情况下解决此问题吗？
+
+      
+
+     示例 1：
+
+     输入：s = "1 + 1"
+     输出：2
+     示例 2：
+
+     输入：s = " 6-4 / 2 "
+     输出：4
+     示例 3：
+
+     输入：s = "2*(5+5*2)/3+(6/2+8)"
+     输出：21
+     示例 4：
+
+     输入：s = "(2+6* 3+5- (3*14/7+2)*5)+3"
+     输出：-12
+     示例 5：
+
+     输入：s = "0"
+     输出：0
+      
+
+     提示：
+
+     1 <= s <= 104
+     s 由整数、'+'、'-'、'*'、'/'、'('、')' 和 ' ' 组成
+     s 是一个 有效的 表达式
+     通过次数2,817提交次数6,708
+
+     来源：力扣（LeetCode）
+     链接：https://leetcode-cn.com/problems/basic-calculator-iii
+     著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     */
+    int calculateIII(string s) {
+        return 0;
+    }
+    
+    /**
+     224. 基本计算器
+     实现一个基本的计算器来计算一个简单的字符串表达式 s 的值。
+
+      
+
+     示例 1：
+
+     输入：s = "1 + 1"
+     输出：2
+     示例 2：
+
+     输入：s = " 2-1 + 2 "
+     输出：3
+     示例 3：
+
+     输入：s = "(1+(4+5+2)-3)+(6+8)"
+     输出：23
+      
+
+     提示：
+
+     1 <= s.length <= 3 * 105
+     s 由数字、'+'、'-'、'('、')'、和 ' ' 组成
+     s 表示一个有效的表达式
+     */
+    int calculateBase(string s) {
+        int i = 0;
+        return helper(s, i);
+    }
+    
+    int helper(string &s, int &i) {
+        stack<int> stk;
+        int num = 0;
+        char preOp = '+';
+        for (; i < s.length(); ++i) {
+            if (isdigit(s[i])) {
+                num = num * 10 + (s[i] - '0');
+            } else if (s[i] == '(') {
+                ++i;
+                num = helper(s, i);
+            }
+            
+            if (!isdigit(s[i]) || i == s.length() - 1) {
+                if (preOp == '+') {
+                    stk.push(num);
+                } else if (preOp == '-') {
+                    stk.push(-num);
+                } else if (preOp == '*') {
+                    num = num * stk.top();
+                    stk.pop();
+                    stk.push(num);
+                } else if (preOp == '/') {
+                    num = stk.top() / num;
+                    stk.pop();
+                    stk.push(num);
+                } else {
+                    // do nothing
+                }
+                preOp = s[i];
+                num = 0;
+            }
+        
+            if(s[i] == ')'){
+                break;
+            }
+        }
+        
+        int ret = 0;
+        while (!stk.empty()) {
+            ret += stk.top();
+            stk.pop();
+        }
+        
+        return ret;
+    }
 };
 
 #endif /* Algorithms4Chapter1_hpp */

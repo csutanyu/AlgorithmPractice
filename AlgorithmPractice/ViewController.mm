@@ -114,7 +114,9 @@ using namespace std;
     
     CalculatorSolution cs;
 //    int res = cs.calculate("1*2-3/4+5*6-7*8+9/10");
-    int res = cs.calculateIIV2("3+2*2");
+//    int res = cs.calculateIIV2("3+2*2");
+    
+    int rese = cs.calculateIII("(2+6* 3+5- (3*14/7+2)*5)+3");
 }
 
 
