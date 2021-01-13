@@ -13,7 +13,7 @@
 #import "DPSolution.cpp"
 #import "TreeSolution.hpp"
 #import "Algorithms4Chapter1.hpp"
-
+#import "LeetCodeCommons.hpp"
 #include <string>
 #include <vector>
 
@@ -116,7 +116,35 @@ using namespace std;
 //    int res = cs.calculate("1*2-3/4+5*6-7*8+9/10");
 //    int res = cs.calculateIIV2("3+2*2");
     
-    int rese = cs.calculateBase("1 + 1");
+//    int rese = cs.calculateBase(" 6-4 / 2 ");
+    
+//    ["FreqStack","push","push","push","push","push","push","push","push","push","push","pop","pop","pop","pop","pop","pop","pop","pop","pop","pop"]
+//    [[],[5],[1],[2],[5],[5],[5],[1],[6],[1],[5],[],[],[],[],[],[],[],[],[],[]]
+    FreqStack freqStk;
+    freqStk.push(5);
+    freqStk.push(1);
+    freqStk.push(2);
+    freqStk.push(5);
+    freqStk.push(5);
+    freqStk.push(5);
+    freqStk.push(1);
+    freqStk.push(6);
+    freqStk.push(1);
+    freqStk.push(5);
+    
+    vector<int> ret;
+    ret.push_back(freqStk.pop());
+    ret.push_back(freqStk.pop());
+    ret.push_back(freqStk.pop());
+    ret.push_back(freqStk.pop());
+    ret.push_back(freqStk.pop());
+    ret.push_back(freqStk.pop());
+    ret.push_back(freqStk.pop());
+    ret.push_back(freqStk.pop());
+    ret.push_back(freqStk.pop());
+    ret.push_back(freqStk.pop());
+    
+    int i = 0;
 }
 
 
