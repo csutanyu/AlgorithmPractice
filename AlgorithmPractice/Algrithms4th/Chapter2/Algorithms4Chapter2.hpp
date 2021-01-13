@@ -26,7 +26,7 @@
 using namespace std;
 
 /**
- 选择排序 P 157
+ 选择排序 P 156
  */
 class SelectSort {
 public:
@@ -42,6 +42,49 @@ public:
             int temp = vec[i];
             vec[i] = vec[min];
             vec[min] = temp;
+        }
+    }
+};
+
+/**
+ 插入排序 P157
+ */
+class InsertSort {
+public:
+    void sort(vector<int> & vec) {
+        int N = (int)vec.size();
+        int temp = 0;
+        for (int i = 1; i < N; ++i) {
+            for (int j = i; j > 0 && vec[j] < vec[j-1]; --j) {
+                temp = vec[j];
+                vec[j] = vec[j-1];
+                vec[j-1] = temp;
+            }
+        }
+    }
+};
+
+/**
+ 希尔排序 P163
+ */
+class ShellSort {
+public:
+    void sort(vector<int> & vec) {
+        int N = (int)vec.size();
+        int h = 1;
+        while (h < N/3) {
+            h = 3 * h + 1;
+        }
+        int temp = 0;
+        while (h >= 1) {
+            for (int i = h; i < N; ++i) {
+                for (int j = i; j > 0 && vec[j] < vec[j-h]; j -= h) {
+                    temp = vec[j];
+                    vec[j] = vec[j-1];
+                    vec[j-1] = temp;
+                }
+            }
+            --h;
         }
     }
 };
