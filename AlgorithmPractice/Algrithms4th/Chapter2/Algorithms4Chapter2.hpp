@@ -96,7 +96,18 @@ class Merge {
 public:
     void sort(vector<int> &vec) {
         vector<int> auxVec(vec);
+//        mergeSort(vec, auxVec, 0, vec.size());
         
+        
+        /**
+         自底向上归并排序
+         */
+        int N = (int)vec.size();
+        for (int sz = 1; sz < N - 1; sz += sz) {
+            for (int low = 0; low < N - 1; low += 2 * sz) {
+                merge(vec, auxVec, low, low + sz - 1, min(low + 2*sz -1, N - 1));
+            }
+        }
     }
     
     void mergeSort(vector<int> &vec, vector<int> &temp, int low, int high) {
