@@ -89,5 +89,45 @@ public:
     }
 };
 
+/**
+ 自顶向下的归并排序 P171
+ */
+class Merge {
+public:
+    void sort(vector<int> &vec) {
+        vector<int> auxVec(vec);
+        
+    }
+    
+    void mergeSort(vector<int> &vec, vector<int> &temp, int low, int high) {
+        if (low >= high) {
+            return;
+        }
+        int mid = low + (high - low) / 2;
+        mergeSort(vec, temp, low, mid);
+        mergeSort(vec, temp, mid + 1, high);
+        merge(vec, temp, low, mid, high);
+    }
+    
+    void merge(vector<int> &vec, vector<int> &temp, int low, int mid, int high) {
+        for (int i = low; i < high; ++i) {
+            temp[i] = vec[i];
+        }
+        int i = low;
+        int j = mid + 1;
+        for (int k = low; k < high; ++k) {
+            if (i > mid) {
+                vec[k] = temp[j++];
+            } else if (j > high) {
+                vec[k] = temp[i++];
+            } else if (temp[i] <= temp[j]) {
+                vec[k] = temp[i++];
+            } else {
+                vec[k] = temp[j++];
+            }
+        }
+    }
+};
+
 
 #endif /* Algorithms4Chapter2_hpp */
