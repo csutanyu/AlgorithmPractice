@@ -200,7 +200,7 @@ public:
     int partition(vector<int> &vec, int low, int high) {
         int val = vec[low];
         int i = low;
-        int j = high + 1;
+        int j = high+1;
         
         while (true) {
             while (vec[++i] < val) {
@@ -216,9 +216,15 @@ public:
             if (i >= j) {
                 break;
             }
+<<<<<<< HEAD
             swap(vec[j], vec[i]);
         }
         swap(vec[low], vec[j]);
+=======
+            swap(vec[i], vec[j]);
+        }
+        swap(vec[j], vec[low]);
+>>>>>>> 修复 快速排序 P182
         
         return j;
     }
