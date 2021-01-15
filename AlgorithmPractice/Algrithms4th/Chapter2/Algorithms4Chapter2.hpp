@@ -140,5 +140,50 @@ public:
     }
 };
 
+/**
+ 快速排序 P182
+ */
+class QuickSort {
+    
+public:
+    void sort(vector<int> &vec) {
+        quickSort(vec, 0, (int)(vec.size()));
+    }
+    
+    void quickSort(vector<int> &vec, int low, int high) {
+        if (low >= high) {
+            return;
+        }
+        int j = partition(vec, low, high);
+        quickSort(vec, low, j - 1);
+        quickSort(vec, j + 1, high);
+    }
+    
+    int partition(vector<int> &vec, int low, int high) {
+        int val = vec[low];
+        int i = low;
+        int j = high + 1;
+        
+        while (true) {
+            while (vec[++i] < val) {
+                if (i == high) {
+                    break;
+                }
+            }
+            while (vec[--j] > val) {
+                if (j == low) {
+                    break;
+                }
+            }
+            if (i >= j) {
+                break;
+            }
+            swap(vec[j], vec[low]);
+        }
+        
+        return j;
+    }
+};
+
 
 #endif /* Algorithms4Chapter2_hpp */
