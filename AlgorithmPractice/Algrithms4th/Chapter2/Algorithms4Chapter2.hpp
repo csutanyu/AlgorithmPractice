@@ -281,5 +281,44 @@ private:
     }
 };
 
+#warning  TODO: P203  2.4.4.6 索引优先队列
+
+
+/**
+ P205  2.4.5 堆排序
+ */
+class HeapSort {
+public:
+    void sort(vector<int> &vec) {
+        int N = (int)(vec.size());
+        if (N <= 1) {
+            return;
+        }
+        
+        // 注意：这里与用堆实现优先队列不一样的是，这里数组的0下标有元素，因此这种情况下，一个元素 i 的2个儿子节点应该是 2 * i + 1 和 2 * i + 2
+        for (int i = (N - 2) / 2; i >= 0; --i) {
+            sink(vec, i, N - 1);
+        }
+        while (N > 1) {
+            swap(vec[0], vec[N-1]);
+            --N;
+            sink(vec, 0, N - 1);
+        }
+    }
+    
+    void sink(vector<int> &vec, int i, int maxIndex) {
+        while (2 * i + 1 <= maxIndex) {
+            int k = 2 * i + 1;
+            if (k + 1 <= maxIndex && vec[k] < vec[k+1]) {
+                ++k;
+            }
+            if (vec[i] > vec[k]) {
+                break;
+            }
+            swap(vec[i], vec[k]);
+            i = k;
+        }
+    }
+};
 
 #endif /* Algorithms4Chapter2_hpp */

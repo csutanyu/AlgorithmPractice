@@ -30,7 +30,7 @@ using namespace std;
     [super viewDidLoad];
 
     vector<int> vec = {2000, 3, 200, 8, 199, 89, 90, 66,  299, 5, 1, 10, 2, 9, 20, 500};
-    QuickSort s;
+    HeapSort s;
     s.sort(vec);
     
     PriorityQueueInt pq;
