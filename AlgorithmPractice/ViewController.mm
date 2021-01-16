@@ -13,6 +13,7 @@
 #import "DPSolution.cpp"
 #import "TreeSolution.hpp"
 #import "Algorithms4Chapter1.hpp"
+#import "Algorithms4Chapter2.hpp"
 #import "LeetCodeCommons.hpp"
 #include <string>
 #include <vector>
@@ -27,6 +28,10 @@ using namespace std;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    vector<int> vec = {2000, 3, 200, 8, 199, 89, 90, 66,  299, 5, 1, 10, 2, 9, 20, 500};
+    QuickSort s;
+    s.sort(vec);
     
 //    SortSolution so = SortSolution();
     
