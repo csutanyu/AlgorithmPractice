@@ -153,7 +153,39 @@ class QuickSort {
     
 public:
     void sort(vector<int> &vec) {
+#if 0
         quickSort(vec, 0, (int)(vec.size() - 1));
+#else
+        quick3way(vec, 0, (int)vec.size() - 1);
+#endif
+    }
+    
+    /**
+     三向切分的快速排序 P189
+     */
+    void quick3way(vector<int> &vec, int low, int high) {
+        if (low >= high) {
+            return;
+        }
+        int val = vec[low];
+        int lt = low;
+        int gt = high;
+        int i = lt;
+        while (i <= gt) {
+            if (vec[i] < val) {
+                swap(vec[i], vec[lt]);
+                ++lt;
+                ++i;
+            } else if (vec[i] > val) {
+                swap(vec[i], vec[gt]);
+                --gt;
+                ++i;
+            } else {
+                ++i;
+            }
+        }
+        quick3way(vec, low, lt - 1);
+        quick3way(vec, gt + 1, high);
     }
     
     void quickSort(vector<int> &vec, int low, int high) {
