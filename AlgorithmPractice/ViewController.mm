@@ -33,6 +33,31 @@ using namespace std;
     QuickSort s;
     s.sort(vec);
     
+    PriorityQueueInt pq;
+    pq.push(3);
+    pq.push(200);
+    pq.push(8);
+    pq.push(199);
+    pq.push(89);
+    pq.push(90);
+    pq.push(66);
+    pq.push(299);
+    pq.push(5);
+    pq.push(1);
+    pq.push(10);
+    pq.push(2);
+    pq.push(9);
+    pq.push(20);
+    pq.push(500);
+    pq.push(2000);
+    vector<int> vec2;
+    
+    while (pq.size() > 0) {
+        vec2.push_back(pq.top());
+        pq.pop();
+    }
+    
+    
 //    SortSolution so = SortSolution();
     
 //    int array[] = {3, 8, 5, 1, 10, 2, 9};

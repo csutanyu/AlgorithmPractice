@@ -187,6 +187,7 @@ public:
         quick3way(vec, low, lt - 1);
         quick3way(vec, gt + 1, high);
     }
+#warning TODO: P192 2.3.22 快 速 三 向 切 分。(J. Bently，D. McIlroy)
     
     void quickSort(vector<int> &vec, int low, int high) {
         if (low >= high) {
@@ -216,17 +217,67 @@ public:
             if (i >= j) {
                 break;
             }
-<<<<<<< HEAD
             swap(vec[j], vec[i]);
         }
         swap(vec[low], vec[j]);
-=======
-            swap(vec[i], vec[j]);
-        }
-        swap(vec[j], vec[low]);
->>>>>>> 修复 快速排序 P182
         
         return j;
+    }
+};
+
+class PriorityQueueInt {
+    vector<int> _pq;
+    int _capacity;
+    int _size;
+public:
+    PriorityQueueInt(int capacity = 20):_capacity(capacity), _pq(capacity, 0), _size(0) {
+    }
+    
+    void push(int x) {
+        _pq[++_size] = x;
+        swim(_size);
+    }
+    
+    int top() {
+        return _pq[1];
+    }
+    
+    void pop() {
+        _pq[1] = _pq[_size];
+        _pq[_size] = 0;
+        --_size;
+        sink(1);
+    }
+    
+    int size(void) {
+        return _size;
+    }
+    
+private:
+    
+    inline bool less(int i, int j) {
+        return _pq[i] < _pq[j];
+    }
+    
+    void swim(int k) {
+        while (k > 1 && less(k/2, k)) {
+            swap(_pq[k/2], _pq[k]);
+            k = k/2;
+        }
+    }
+    
+    void sink(int k) {
+        while (2 * k <= _size) {
+            int j = 2 * k;
+            if (j + 1 <= _size && less(j, j + 1)) {
+                ++j;
+            }
+            if (less(j, k)) {
+                break;
+            }
+            swap(_pq[j], _pq[k]);
+            k = j;
+        }
     }
 };
 
