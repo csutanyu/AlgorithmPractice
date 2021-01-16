@@ -95,10 +95,16 @@ public:
 class Merge {
 public:
     void sort(vector<int> &vec) {
-        vector<int> auxVec(vec);
-//        mergeSort(vec, auxVec, 0, vec.size());
-        
-        
+#if 0
+        vector<int> auxVec(vec.size(), 0);
+        mergeSort(vec, auxVec, 0, vec.size() - 1);
+#else
+        mergSortBottom(vec);
+#endif
+    }
+    
+    void mergSortBottom(vector<int> &vec) {
+        vector<int> auxVec(vec.size(), 0);
         /**
          自底向上归并排序
          */
@@ -121,12 +127,12 @@ public:
     }
     
     void merge(vector<int> &vec, vector<int> &temp, int low, int mid, int high) {
-        for (int i = low; i < high; ++i) {
+        for (int i = low; i <= high; ++i) {
             temp[i] = vec[i];
         }
         int i = low;
         int j = mid + 1;
-        for (int k = low; k < high; ++k) {
+        for (int k = low; k <= high; ++k) {
             if (i > mid) {
                 vec[k] = temp[j++];
             } else if (j > high) {
