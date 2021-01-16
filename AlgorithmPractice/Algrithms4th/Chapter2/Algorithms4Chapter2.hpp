@@ -153,7 +153,7 @@ class QuickSort {
     
 public:
     void sort(vector<int> &vec) {
-        quickSort(vec, 0, (int)(vec.size()));
+        quickSort(vec, 0, (int)(vec.size() - 1));
     }
     
     void quickSort(vector<int> &vec, int low, int high) {
@@ -184,8 +184,9 @@ public:
             if (i >= j) {
                 break;
             }
-            swap(vec[j], vec[low]);
+            swap(vec[j], vec[i]);
         }
+        swap(vec[low], vec[j]);
         
         return j;
     }
