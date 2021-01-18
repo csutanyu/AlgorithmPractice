@@ -30,6 +30,12 @@ using namespace std;
     [super viewDidLoad];
 
     vector<int> vec = {2000, 3, 200, 8, 199, 89, 90, 66,  299, 5, 1, 10, 2, 9, 20, 500};
+    vector<int>::iterator begin = vec.begin();
+    vector<int>::iterator it = find(begin, begin + 2, 8);
+    if (it != vec.end()) {
+        int x = *it;
+    }
+    
     HeapSort s;
     s.sort(vec);
     

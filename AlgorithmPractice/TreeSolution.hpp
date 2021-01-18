@@ -389,6 +389,82 @@ public:
         return ret;
     }
     
+    /**
+     剑指 Offer 07. 重建二叉树
+     输入某二叉树的前序遍历和中序遍历的结果，请重建该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。
+
+      
+
+     例如，给出
+
+     前序遍历 preorder = [3,9,20,15,7]
+     中序遍历 inorder = [9,3,15,20,7]
+     返回如下的二叉树：
+
+         3
+        / \
+       9  20
+         /  \
+        15   7
+      
+
+     限制：
+
+     0 <= 节点个数 <= 5000
+
+      
+
+     注意：本题与主站 105 题重复：https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
+     https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof/
+     */
+    unordered_map<int, int> preorderMap;
+    unordered_map<int, int> inorderMap;
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        for (int i = 0; i < preorder.size(); ++i) {
+            preorderMap[preorder[i]] = i;
+            inorderMap[inorder[i]] = i;
+        }
+        
+        
+        if (preorder.size() == 0) return NULL;
+        
+        return doBuildTree(preorder, 0, inorder, 0, (int)inorder.size());
+    }
+    
+    TreeNode* doBuildTree(vector<int>& preorder, int pos, vector<int>& inorder, int inPos, int len) {
+        if (len <= 0) {
+            return NULL;
+        }
+        if (len == 1) {
+            TreeNode *rootNode = new TreeNode(preorder[0]);
+            return rootNode;
+        }
+        
+        TreeNode *rootNode = new TreeNode(preorder[pos]);
+        
+        // root在中序中的index
+        int rootIndexOfInorder = inorderMap[preorder[pos]];
+        
+        // 左子树中序遍历，len
+        int leftLen = 0;
+        if (rootIndexOfInorder > inPos) { // root不是中序遍历的第一个元素，因此有左子树
+            leftLen = rootIndexOfInorder - inPos;
+            TreeNode *leftNode = doBuildTree(preorder, pos + 1, inorder, inPos, leftLen);
+            rootNode->left = leftNode;
+        }
+        
+        if (rootIndexOfInorder < inPos + len - 1) { // root不是中序遍历的最后一个元素，因此有右子树
+            // 右子树中序列遍历起pos
+            int rightInorderPos = rootIndexOfInorder + 1;
+            int rightInorderLen = (inPos + len) - rightInorderPos;
+
+            TreeNode *rightNode = doBuildTree(preorder, pos + 1/*root*/ + leftLen/*左子树长度*/, inorder, rightInorderPos, rightInorderLen);
+            
+            rootNode->right = rightNode;
+        }
+        return rootNode;
+    }
+    
 };
 
 
