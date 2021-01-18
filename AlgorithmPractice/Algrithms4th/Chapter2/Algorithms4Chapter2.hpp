@@ -22,6 +22,7 @@
 #include <iostream>
 #include <iosfwd>
 #include <float.h>
+#include "TreeSolution.hpp"
 
 using namespace std;
 
@@ -320,6 +321,83 @@ public:
             swap(vec[i], vec[k]);
             i = k;
         }
+    }
+};
+
+
+
+/*
+ 剑指 Offer 55 - II. 平衡二叉树
+ 输入一棵二叉树的根节点，判断该树是不是平衡二叉树。如果某二叉树中任意节点的左右子树的深度相差不超过1，那么它就是一棵平衡二叉树。
+
+  
+
+ 示例 1:
+
+ 给定二叉树 [3,9,20,null,null,15,7]
+
+     3
+    / \
+   9  20
+     /  \
+    15   7
+ 返回 true 。
+
+ 示例 2:
+
+ 给定二叉树 [1,2,2,3,3,null,null,4,4]
+
+        1
+       / \
+      2   2
+     / \
+    3   3
+   / \
+  4   4
+ 返回 false 。
+ https://leetcode-cn.com/problems/ping-heng-er-cha-shu-lcof/
+  */
+class BinaryTreeSolution {
+public:
+    bool isBalanced(TreeNode* root) {
+        unordered_map<TreeNode *, int> heights;
+        unordered_map<TreeNode *, bool> balances;
+        return isBalanced(root, heights, balances);
+    }
+    
+    bool isBalanced(TreeNode* root, unordered_map<TreeNode *, int> &heights, unordered_map<TreeNode *, bool> &balances) {
+        if (root == NULL) {
+            return true;
+        }
+        if (balances.count(root) != 0) {
+            return balances[root];
+        }
+
+        bool left = isBalanced(root->left, heights, balances);
+        if (!left) {
+            balances[root] = false;
+            return left;
+        }
+        
+        bool right = isBalanced(root->right, heights, balances);
+        if (!right) {
+            balances[root] = false;
+            return right;
+        }
+        
+        int hLeft = 0;
+        if (NULL != root->left) {
+            hLeft = heights[root->left];
+        }
+        int hRight = 0;
+        if (NULL != root->right) {
+            hRight = heights[root->right];
+        }
+        bool isBalanced = abs(hLeft - hRight) <= 1;
+        balances[root] = isBalanced;
+        heights[root] = max(hLeft, hRight) + 1;
+
+        return isBalanced;
     }
 };
 
