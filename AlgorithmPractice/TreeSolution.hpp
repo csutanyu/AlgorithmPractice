@@ -634,7 +634,6 @@ public:
         }
         return true;
     }
-    
     /**
      剑指 Offer 37. 序列化二叉树
      请实现两个函数，分别用来序列化和反序列化二叉树。
@@ -940,6 +939,36 @@ public:
             ans = root;
         }
         return lson || rson || (root->val == p->val || root->val == q->val);
+    }
+
+    bool isSymmetricNonRecursion(TreeNode *root) {
+        if (root == NULL) return true;
+        
+        queue<TreeNode *> que;
+        que.push(root->left);
+        que.push(root->right);
+        
+        bool res = true;
+        while (!que.empty()) {
+            TreeNode *leftNode = que.front(); que.pop();
+            TreeNode *rightNode = que.front(); que.pop();
+            if (leftNode == NULL && rightNode == NULL) {
+                continue;
+            }
+            if (leftNode == NULL || rightNode == NULL) {
+                res = false;
+                break;
+            }
+            if (leftNode->val != rightNode->val) {
+                res = false;
+                break;
+            }
+            que.push(leftNode->left);
+            que.push(rightNode->right);
+            que.push(leftNode->right);
+            que.push(rightNode->left);
+        }
+        return res;
     }
 };
 
