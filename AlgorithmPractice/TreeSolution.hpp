@@ -417,11 +417,9 @@ public:
      注意：本题与主站 105 题重复：https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
      https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof/
      */
-    unordered_map<int, int> preorderMap;
     unordered_map<int, int> inorderMap;
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-        for (int i = 0; i < preorder.size(); ++i) {
-            preorderMap[preorder[i]] = i;
+        for (int i = 0; i < inorder.size(); ++i) {
             inorderMap[inorder[i]] = i;
         }
         
@@ -436,10 +434,9 @@ public:
             return NULL;
         }
         if (len == 1) {
-            TreeNode *rootNode = new TreeNode(preorder[0]);
+            TreeNode *rootNode = new TreeNode(preorder[pos]);
             return rootNode;
         }
-        
         TreeNode *rootNode = new TreeNode(preorder[pos]);
         
         // root在中序中的index
