@@ -462,6 +462,58 @@ public:
         return rootNode;
     }
     
+    
+    /**
+     1373. 二叉搜索子树的最大键值和
+     给你一棵以 root 为根的 二叉树 ，请你返回 任意 二叉搜索子树的最大键值和。
+
+     二叉搜索树的定义如下：
+
+     任意节点的左子树中的键值都 小于 此节点的键值。
+     任意节点的右子树中的键值都 大于 此节点的键值。
+     任意节点的左子树和右子树都是二叉搜索树。
+      
+
+     示例 1：
+
+
+
+     输入：root = [1,4,3,2,4,2,5,null,null,null,null,null,null,4,6]
+     输出：20
+     解释：键值为 3 的子树是和最大的二叉搜索树。
+     https://leetcode-cn.com/problems/maximum-sum-bst-in-binary-tree/
+     */
+    int maxSumBST(TreeNode* root) {
+        int maxSum = 0;
+        vector<int> m = doMaxSumBST(root, maxSum);
+        return maxSum;
+    }
+    
+    /**
+             是否平衡、最小值 、最大值、和
+     */
+    vector<int> doMaxSumBST(TreeNode* root, int &maxSum) {
+        if (root == NULL) {
+            return vector<int>{1, INT32_MAX, INT32_MIN, 0};
+        }
+        
+        vector<int> leftM = doMaxSumBST(root->left, maxSum);
+        vector<int> rightM = doMaxSumBST(root->right, maxSum);
+        
+        vector<int> res(4, 0);
+        if (leftM[0] == 1 && rightM[0] == 1 // 左右子树是平衡二叉树
+                && leftM[2] < root->val && rightM[1] > root->val // 左子树最大值比root小，右子树最小值比root大
+            ) {
+            res[0] = 1;
+            res[1] = min(leftM[1], root->val);
+            res[2] = max(rightM[2], root->val);
+            res[3] = leftM[3] + rightM[3] + root->val;
+            maxSum = max(maxSum, res[3]);
+        } else {
+            res[0] = 0;
+        }
+        return res;
+    }
 };
 
 
