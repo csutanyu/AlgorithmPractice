@@ -570,7 +570,7 @@ public:
             return false;
         }
         
-        if (A->val != b->val) {
+        if (A->val != B->val) {
             return false;
         }
         return isSubStructureFromRoot(A->left, B->left) && isSubStructureFromRoot(A->right, B->right);
