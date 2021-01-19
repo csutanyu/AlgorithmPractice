@@ -614,42 +614,25 @@ public:
     bool isSymmetric(TreeNode* root) {
         if (root == NULL) return true;
         
-        deque<TreeNode *> curQue;
-        curQue.push_back(root);
-        
-        bool res = true;
-        while (!curQue.empty()) {
-            int N = (int)curQue.size();
-            
-            int iterationCount = N / 2;
-            deque<TreeNode *>::iterator begin = curQue.begin();
-            deque<TreeNode *>::reverse_iterator rbegin = curQue.rbegin();
-            do {
-                if ((*begin)->val != (*rbegin)->val) {
-                    res = false;
-                    break;
-                }
-                ++begin;
-                ++rbegin;
-            } while (--iterationCount > 0);
-            
-            if (!res) {
-                break;
-            }
-            
-            for (int i = 0; i < N; ++i) {
-                TreeNode *firstNode = curQue.front();
-                // 添加首部节点的子节点
-                if (NULL != firstNode->left) {
-                    curQue.push_back(firstNode->left);
-                }
-                if (NULL != firstNode->right) {
-                    curQue.push_back(firstNode->right);
-                }
-                curQue.pop_front();
-            }
+        return isSymmetricRecursion(root->left, root->right);
+    }
+    
+    bool isSymmetricRecursion(TreeNode *left, TreeNode *right) {
+        if (left == NULL && right == NULL) {
+            return true;
+        } else if (left == NULL || right == NULL) {
+            return false;
+        } else if (left->val != right->val) {
+            return false;
         }
-        return res;
+        // 都不为空
+        if (!isSymmetricRecursion(left->left, right->right)) {
+            return false;
+        }
+        if (!isSymmetricRecursion(left->right, right->left)) {
+            return false;
+        }
+        return true;
     }
     
     /**
