@@ -28,6 +28,11 @@ using namespace std;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    TreeSolution ts;
+    
+    TreeNode *root = ts.deserialize("[-1,0,1]");
 
     vector<int> vec = {2000, 3, 200, 8, 199, 89, 90, 66,  299, 5, 1, 10, 2, 9, 20, 500};
     vector<int>::iterator begin = vec.begin();

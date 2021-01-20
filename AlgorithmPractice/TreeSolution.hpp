@@ -700,40 +700,62 @@ public:
 
     // Decodes your encoded data to tree.
     TreeNode* deserialize(string data) {
-        vector<TreeNode *> que;
-        for (int index = 1; index < data.size() - 1; ++index) {
-            if (isdigit(data[index])) {
-                int val = 0;
+        if (data.size() == 0 || data.size() == 2) {
+            return nullptr;
+        }
+        int index = 1;
+        int dataLen = (int)(data.size());
+        long val = nextToken(data, index, dataLen);
+        if (val == LONG_MAX || val == LONG_MIN) {
+            return nullptr;
+        }
+        
+        TreeNode *root = new TreeNode((int)val);
+        val = 0;
+        queue<TreeNode *> que;
+        que.push(root);
+        while (!que.empty() && index < dataLen) {
+            TreeNode *node = que.front();
+            que.pop();
+            long left = nextToken(data, index, dataLen);
+            if (left != LONG_MAX && left != LONG_MIN) {
+                TreeNode *leftNode = new TreeNode((int)left);
+                node->left = leftNode;
+                que.push(leftNode);
+            }
+            long right = nextToken(data, index, dataLen);
+            if (right != LONG_MAX && right != LONG_MIN) {
+                TreeNode *rightNode = new TreeNode((int)right);
+                node->right = rightNode;
+                que.push(rightNode);
+            }
+        }
+        return root;
+    }
+    
+    long nextToken(string &data, int &index, int &len) {
+        while (index < len) {
+            if (data[index] == '-' || isdigit(data[index])) {
+                bool negative = data[index] == '-';
+                if (data[index] == '-') {
+                    ++index;
+                }
+                long val = 0;
                 while (isdigit(data[index])) {
                     val = val * 10 + (data[index] - '0');
                     ++index;
                 }
-                TreeNode *node = new TreeNode(val);
-                que.push_back(node);
+                return negative ? -val : val;
             } else if (isalpha(data[index])) {
                 while (isalpha(data[index])) {
                     ++index;
                 }
-                que.push_back(nullptr);
+                return LONG_MIN; // null
+            } else {
+                ++index;
             }
         }
-        
-        if (que.size() == 0) {
-            return nullptr;
-        }
-        
-        int pos = 1;
-        int N = (int)que.size();
-        int i = 0;
-        while (i < N - 1) {
-            if (que[i] == nullptr) continue;
-            
-            que[i]->left = que[pos+1];
-            que[i]->right = que[pos+2];
-            ++i;
-        }
-        
-        return que[0];
+        return LONG_MAX; // nore more
     }
 };
 
