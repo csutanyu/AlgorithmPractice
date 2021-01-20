@@ -650,6 +650,91 @@ public:
         }
         return res;
     }
+    
+    /**
+     剑指 Offer 37. 序列化二叉树
+     请实现两个函数，分别用来序列化和反序列化二叉树。
+
+     示例:
+
+     你可以将以下二叉树：
+
+         1
+        / \
+       2   3
+          / \
+         4   5
+
+     序列化为 "[1,2,3,null,null,4,5]"
+     注意：本题与主站 297 题相同：https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/
+
+     通过次数30,130提交次数57,324
+     在真实的面试中遇到过这道题？
+     https://leetcode-cn.com/problems/xu-lie-hua-er-cha-shu-lcof/
+     */
+    // Encodes a tree to a single string.
+    string serialize(TreeNode* root) {
+        std::ostringstream stringStream;
+        queue<TreeNode*> que;
+        if (root != NULL) {
+            que.push(root);
+        }
+        stringStream << "[";
+        while(!que.empty()) {
+            TreeNode *node = que.front();
+            que.pop();
+            if (node == NULL) {
+                stringStream << "null";
+            } else {
+                stringStream << node->val;
+                que.push(node->left);
+                que.push(node->right);
+            }
+            if (!que.empty()) {
+                stringStream << ",";
+            }
+        }
+        stringStream << "]";
+        return stringStream.str();
+    }
+
+    // Decodes your encoded data to tree.
+    TreeNode* deserialize(string data) {
+        vector<TreeNode *> que;
+        for (int index = 1; index < data.size() - 1; ++index) {
+            if (isdigit(data[index])) {
+                int val = 0;
+                while (isdigit(data[index])) {
+                    val = val * 10 + (data[index] - '0');
+                    ++index;
+                }
+                TreeNode *node = new TreeNode(val);
+                que.push_back(node);
+            } else if (isalpha(data[index])) {
+                while (isalpha(data[index])) {
+                    ++index;
+                }
+                que.push_back(nullptr);
+            }
+        }
+        
+        if (que.size() == 0) {
+            return nullptr;
+        }
+        
+        int pos = 1;
+        int N = (int)que.size();
+        int i = 0;
+        while (i < N - 1) {
+            if (que[i] == nullptr) continue;
+            
+            que[i]->left = que[pos+1];
+            que[i]->right = que[pos+2];
+            ++i;
+        }
+        
+        return que[0];
+    }
 };
 
 
