@@ -32,7 +32,15 @@ using namespace std;
     
     TreeSolution ts;
     
-    TreeNode *root = ts.deserialize("[-1,0,1]");
+    
+    
+    TreeNode *root = new TreeNode(1);
+    root->left = new TreeNode(3);
+    root->right = new TreeNode(2);
+    root->right->left = new TreeNode(4);
+    root->right->right = new TreeNode(4);
+    
+    double x = ts.minimalExecTime(root);
 
     vector<int> vec = {2000, 3, 200, 8, 199, 89, 90, 66,  299, 5, 1, 10, 2, 9, 20, 500};
     vector<int>::iterator begin = vec.begin();
