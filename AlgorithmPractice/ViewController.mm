@@ -34,13 +34,13 @@ using namespace std;
     
     
     
-    TreeNode *root = new TreeNode(1);
-    root->left = new TreeNode(3);
-    root->right = new TreeNode(2);
-    root->right->left = new TreeNode(4);
-    root->right->right = new TreeNode(4);
+    Node *root = new Node(4);
+    root->left = new Node(2);
+    root->right = new Node(5);
+    root->left->left = new Node(1);
+    root->left->right = new Node(3);
     
-    double x = ts.minimalExecTime(root);
+    Node *x = ts.treeToDoublyList(root);
 
     vector<int> vec = {2000, 3, 200, 8, 199, 89, 90, 66,  299, 5, 1, 10, 2, 9, 20, 500};
     vector<int>::iterator begin = vec.begin();
