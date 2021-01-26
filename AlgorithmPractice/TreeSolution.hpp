@@ -1082,41 +1082,35 @@ public:
     vector<vector<int>> levelOrderIII(TreeNode* root) {
         vector<vector<int>> res;
         
-        deque<TreeNode *> que;
-        stack<TreeNode *> stk;
+        stack<TreeNode *> leftStk;
+        stack<TreeNode *> rightStk;
         if (root != nullptr) {
-            que.push_front(root);
+            leftStk.push(root);
         }
         bool directionFlag = true;
-        while ( (directionFlag && !que.empty()) || (!directionFlag && !stk.empty()) ) {
-            int N = 0;
-            if (directionFlag) {
-                N  = (int)que.size();
-            } else {
-                N = (int)stk.size();
-            }
-
+        while ( !leftStk.empty() || !rightStk.empty() ) {
+            stack<TreeNode *> &currentStk = leftStk.empty() ? rightStk : leftStk;
+            stack<TreeNode *> &nextStk = leftStk.empty() ? leftStk : rightStk;
+            
+            int N = (int)currentStk.size();
             vector<int> vec(N, 0);
             for (int i = 0; i < N; ++i) {
-                if (directionFlag) {
-                    TreeNode *node = que.front();
-                    que.pop_front();
-                    vec.push_back(node->val);
+                TreeNode *node = currentStk.top();
+                currentStk.pop();
+                vec[i] = node->val;
+                if (directionFlag) { // 从左到右
                     if (node->left) {
-                        stk.push(node->left);
+                        nextStk.push(node->left);
                     }
                     if (node->right) {
-                        stk.push(node->right);
+                        nextStk.push(node->right);
                     }
                 } else {
-                    TreeNode *node = stk.top();
-                    stk.pop();
-                    vec.push_back(node->val);
                     if (node->right) {
-                        que.push_front(node->right);
+                        nextStk.push(node->right);
                     }
                     if (node->left) {
-                        que.push_front(node->left);
+                        nextStk.push(node->left);
                     }
                 }
             }
@@ -1126,7 +1120,6 @@ public:
         
         return res;
     }
-    
 };
 
 
