@@ -32,15 +32,14 @@ using namespace std;
     
     TreeSolution ts;
     
-//    [3,9,20,null,null,15,7]
-    
+//    [3,1,4,null,2]
+
     TreeNode *root = new TreeNode(3);
-    root->left = new TreeNode(9);
-    root->right = new TreeNode(20);
-    root->right->left = new TreeNode(15);
-    root->right->right = new TreeNode(7);
+    root->left = new TreeNode(1);
+    root->right = new TreeNode(4);
+    root->left->left = new TreeNode(2);
     
-    vector<vector<int>> res = ts.levelOrderIII(root);
+    int res = ts.kthLargest(root, 1);
     
 //    Node *x = ts.treeToDoublyList(root);
 
