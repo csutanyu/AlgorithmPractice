@@ -1051,54 +1051,82 @@ public:
         
         return res;
     }
+    /**
+     剑指 Offer 32 - III. 从上到下打印二叉树 III
+     请实现一个函数按照之字形顺序打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右到左的顺序打印，第三行再按照从左到右的顺序打印，其他行以此类推。
+
+      
+
+     例如:
+     给定二叉树: [3,9,20,null,null,15,7],
+
+         3
+        / \
+       9  20
+         /  \
+        15   7
+     返回其层次遍历结果：
+
+     [
+       [3],
+       [20,9],
+       [15,7]
+     ]
+      
+
+     提示：
+
+     节点总数 <= 1000
+     https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-iii-lcof/
+     */
+    vector<vector<int>> levelOrderIII(TreeNode* root) {
+        vector<vector<int>> res;
+        
+        deque<TreeNode *> que;
+        stack<TreeNode *> stk;
+        if (root != nullptr) {
+            que.push_front(root);
+        }
+        bool directionFlag = true;
+        while ( (directionFlag && !que.empty()) || (!directionFlag && !stk.empty()) ) {
+            int N = 0;
+            if (directionFlag) {
+                N  = (int)que.size();
+            } else {
+                N = (int)stk.size();
+            }
+
+            vector<int> vec(N, 0);
+            for (int i = 0; i < N; ++i) {
+                if (directionFlag) {
+                    TreeNode *node = que.front();
+                    que.pop_front();
+                    vec.push_back(node->val);
+                    if (node->left) {
+                        stk.push(node->left);
+                    }
+                    if (node->right) {
+                        stk.push(node->right);
+                    }
+                } else {
+                    TreeNode *node = stk.top();
+                    stk.pop();
+                    vec.push_back(node->val);
+                    if (node->right) {
+                        que.push_front(node->right);
+                    }
+                    if (node->left) {
+                        que.push_front(node->left);
+                    }
+                }
+            }
+            directionFlag = !directionFlag;
+            res.push_back(vec);
+        }
+        
+        return res;
+    }
     
-    
-//    Node *doTreeToDoubleList(Node* root) {
-//        if (root->left == nullptr && root->right == nullptr) {
-//            root->left = root;
-//            root->right = root;
-//            return root;
-//        } else if (root->right != nullptr) {
-//            Node *rightHead = doTreeToDoubleList(root->right);
-//            Node *rightTail = rightHead->left;
-//
-//            root->right = rightHead;
-//            rightHead->left = root;
-//
-//            root->left = rightTail;
-//            rightTail->right = root;
-//
-//            return root;
-//        } else if (root->left != nullptr) {
-//            Node *leftHead = doTreeToDoubleList(root->left);
-//            Node *leftTail = leftHead->left;
-//
-//            leftTail->right = root;
-//            root->left = leftTail;
-//
-//            root->right = leftHead;
-//            leftHead->left = root;
-//
-//            return leftHead;
-//        } else { // 左右均不为空
-//            Node *leftHead = doTreeToDoubleList(root->left);
-//            Node *leftTail = leftHead->left;
-//
-//            Node *rightHead = doTreeToDoubleList(root->right);
-//            Node *rightTail = rightHead->left;
-//
-//            leftTail->right = root;
-//            root->left = leftTail;
-//
-//            root->right = rightHead;
-//            rightHead->left = root;
-//
-//            rightTail->right = leftHead;
-//            leftHead->left =  rightTail;
-//
-//            return leftHead;
-//        }
-//    }
 };
 
 

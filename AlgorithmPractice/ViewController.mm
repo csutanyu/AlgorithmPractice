@@ -32,15 +32,17 @@ using namespace std;
     
     TreeSolution ts;
     
+//    [3,9,20,null,null,15,7]
     
+    TreeNode *root = new TreeNode(3);
+    root->left = new TreeNode(9);
+    root->right = new TreeNode(20);
+    root->right->left = new TreeNode(15);
+    root->right->right = new TreeNode(7);
     
-    Node *root = new Node(4);
-    root->left = new Node(2);
-    root->right = new Node(5);
-    root->left->left = new Node(1);
-    root->left->right = new Node(3);
+    vector<vector<int>> res = ts.levelOrderIII(root);
     
-    Node *x = ts.treeToDoublyList(root);
+//    Node *x = ts.treeToDoublyList(root);
 
     vector<int> vec = {2000, 3, 200, 8, 199, 89, 90, 66,  299, 5, 1, 10, 2, 9, 20, 500};
     vector<int>::iterator begin = vec.begin();
