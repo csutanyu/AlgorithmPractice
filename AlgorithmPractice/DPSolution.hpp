@@ -1530,5 +1530,48 @@ public:
         vector<int> res(dp.begin(), (dp.begin() + N - k + 1));
         return res;
     }
+    
+    vector<int> maxSlidingWindowV2(vector<int>& nums, int k) {
+           int N = (int)nums.size();
+           if (N == 0 || k == 0) return vector<int>();
+
+           deque<int> que;
+           int winCount = N - k + 1;
+           for (int i = 0; i < k && i < N; ++i) {
+               while (!que.empty() && que.back() < nums[i]) {
+                   que.pop_back();
+               }
+               que.push_back(nums[i]);
+           }
+           vector<int> res;
+           if (!que.empty()) {
+               res.push_back(que.front());
+           }
+#if 0 // i从窗口第一个开始
+           for (int i = 1; i < winCount; ++i) {
+               if (nums[i-1] == que.front()) {
+                   que.pop_front();
+               }
+               while (!que.empty() && que.back() < nums[i+k-1]) {
+                   que.pop_back();
+               }
+               que.push_back(nums[i+k-1]);
+               res.push_back(que.front());
+           }
+#else // i从下一个窗口的最后一个元素开始
+        for (int i = k; i < N; ++i) {
+            if (que.front() == nums[i-k]) {
+                que.pop_front();
+            }
+            
+            while (!que.empty() && que.back() < nums[i]) {
+                que.pop_back();
+            }
+            que.push_back(nums[i]);
+            res.push_back(que.front());
+        }
+#endif
+           return res;
+    }
 };
 #endif /* DPSolution_hpp */
