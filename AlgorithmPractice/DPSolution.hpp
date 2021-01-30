@@ -1435,4 +1435,207 @@ public:
         return ret;
     }
 };
+
+/**
+ 1480. 一维数组的动态和
+ 给你一个数组 nums 。数组「动态和」的计算公式为：runningSum[i] = sum(nums[0]…nums[i]) 。
+
+ 请返回 nums 的动态和。
+
+  
+
+ 示例 1：
+
+ 输入：nums = [1,2,3,4]
+ 输出：[1,3,6,10]
+ 解释：动态和计算过程为 [1, 1+2, 1+2+3, 1+2+3+4] 。
+ 示例 2：
+
+ 输入：nums = [1,1,1,1,1]
+ 输出：[1,2,3,4,5]
+ 解释：动态和计算过程为 [1, 1+1, 1+1+1, 1+1+1+1, 1+1+1+1+1] 。
+ 示例 3：
+
+ 输入：nums = [3,1,2,10,1]
+ 输出：[3,4,6,16,17]
+  
+
+ 提示：
+
+ 1 <= nums.length <= 1000
+ -10^6 <= nums[i] <= 10^6
+.https://leetcode-cn.com/problems/running-sum-of-1d-array/
+ */
+class ArrayRunningSolution {
+public:
+    vector<int> runningSum(vector<int>& nums) {
+        int N = nums.size();
+        vector<int> dp(N, 0);
+        if(N > 0) {
+            dp[0] = nums[0];
+        }
+        for (int i = 1; i < nums.size(); ++i) {
+            dp[i] = dp[i-1] + nums[i];
+        }
+        return dp;
+    }
+};
+
+/**
+ 剑指 Offer 59 - I. 滑动窗口的最大值
+ 给定一个数组 nums 和滑动窗口的大小 k，请找出所有滑动窗口里的最大值。
+
+ 示例:
+
+ 输入: nums = [1,3,-1,-3,5,3,6,7], 和 k = 3
+ 输出: [3,3,5,5,6,7]
+ 解释:
+
+   滑动窗口的位置                最大值
+ ---------------               -----
+ [1  3  -1] -3  5  3  6  7       3
+  1 [3  -1  -3] 5  3  6  7       3
+  1  3 [-1  -3  5] 3  6  7       5
+  1  3  -1 [-3  5  3] 6  7       5
+  1  3  -1  -3 [5  3  6] 7       6
+  1  3  -1  -3  5 [3  6  7]      7
+  
+
+ 提示：
+
+ 你可以假设 k 总是有效的，在输入数组不为空的情况下，1 ≤ k ≤ 输入数组的大小。
+
+ 注意：本题与主站 239 题相同：https://leetcode-cn.com/problems/sliding-window-maximum/
+
+.https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/
+ */
+
+class MaxSlidingWindowSolution {
+public:
+    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+        int N = nums.size();
+        vector<int> dp(N, 0);
+        if (N == 0) return dp;
+        if (N < k) return dp; //错误情况
+
+        for (int i = 0; i < N; ++i) {
+            dp[i] = nums[i];
+        }
+        for (int wd = 2; wd <= k; ++wd) {
+            for (int i = 0; i <= N - wd; ++i) {
+                dp[i] = max(dp[i], dp[i+1]);
+            }
+        }
+
+        vector<int> res(dp.begin(), (dp.begin() + N - k + 1));
+        return res;
+    }
+    
+    vector<int> maxSlidingWindowV2(vector<int>& nums, int k) {
+           int N = (int)nums.size();
+           if (N == 0 || k == 0) return vector<int>();
+
+           deque<int> que;
+           int winCount = N - k + 1;
+           for (int i = 0; i < k && i < N; ++i) {
+               while (!que.empty() && que.back() < nums[i]) {
+                   que.pop_back();
+               }
+               que.push_back(nums[i]);
+           }
+           vector<int> res;
+           if (!que.empty()) {
+               res.push_back(que.front());
+           }
+#if 0 // i从窗口第一个开始
+           for (int i = 1; i < winCount; ++i) {
+               if (nums[i-1] == que.front()) {
+                   que.pop_front();
+               }
+               while (!que.empty() && que.back() < nums[i+k-1]) {
+                   que.pop_back();
+               }
+               que.push_back(nums[i+k-1]);
+               res.push_back(que.front());
+           }
+#else // i从下一个窗口的最后一个元素开始
+        for (int i = k; i < N; ++i) {
+            if (que.front() == nums[i-k]) {
+                que.pop_front();
+            }
+            
+            while (!que.empty() && que.back() < nums[i]) {
+                que.pop_back();
+            }
+            que.push_back(nums[i]);
+            res.push_back(que.front());
+        }
+#endif
+           return res;
+    }
+};
+
+/**
+ 剑指 Offer 13. 机器人的运动范围
+ 地上有一个m行n列的方格，从坐标 [0,0] 到坐标 [m-1,n-1] 。一个机器人从坐标 [0, 0] 的格子开始移动，它每次可以向左、右、上、下移动一格（不能移动到方格外），也不能进入行坐标和列坐标的数位之和大于k的格子。例如，当k为18时，机器人能够进入方格 [35, 37] ，因为3+5+3+7=18。但它不能进入方格 [35, 38]，因为3+5+3+8=19。请问该机器人能够到达多少个格子？
+
+  
+
+ 示例 1：
+
+ 输入：m = 2, n = 3, k = 1
+ 输出：3
+ 示例 2：
+
+ 输入：m = 3, n = 1, k = 0
+ 输出：1
+ 提示：
+
+ 1 <= n,m <= 100
+ 0 <= k <= 20
+ 通过次数89,763提交次数175,503
+ https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/submissions/
+ */
+class RobotMovintCountSolution {
+public:
+    int movingCount(int m, int n, int k) {
+       return bfs(m, n, k);
+    }
+
+    int bfs(int m, int n, int k) {
+        vector<vector<bool>> visited(m, vector<bool>(n, false));
+        queue<pair<int, int>> que;
+        que.push(make_pair(0, 0));
+        int res = 0;
+        while (!que.empty()) {
+            pair<int, int> cur = que.front();
+            que.pop();
+            if (visited[cur.first][cur.second] || positionSum(cur.first, cur.second) > k) {
+                continue;
+            }
+            ++res;
+            visited[cur.first][cur.second] = true;
+            if (cur.first + 1 < m) {
+                que.push(make_pair(cur.first + 1, cur.second));
+            }
+            if (cur.second + 1 < n) {
+                que.push(make_pair(cur.first, cur.second + 1));
+            }
+        }
+        return res;
+    }
+
+    int positionSum(int x, int y) {
+        int res = 0;
+        while (x != 0) {
+           res += x % 10;
+           x = x / 10;
+        }
+        while (y != 0) {
+            res += y % 10;
+            y = y / 10;
+        }
+        return res;
+    }
+};
 #endif /* DPSolution_hpp */

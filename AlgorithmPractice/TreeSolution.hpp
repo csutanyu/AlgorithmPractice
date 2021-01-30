@@ -39,6 +39,27 @@ struct TreeNode {
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
+class Node {
+public:
+    int val;
+    Node* left;
+    Node* right;
+
+    Node() {}
+
+    Node(int _val) {
+        val = _val;
+        left = NULL;
+        right = NULL;
+    }
+
+    Node(int _val, Node* _left, Node* _right) {
+        val = _val;
+        left = _left;
+        right = _right;
+    }
+};
+
 class TreeSolution {
     
 public:
@@ -969,6 +990,253 @@ public:
             que.push(rightNode->left);
         }
         return res;
+    }
+    
+    
+    /**
+     剑指 Offer 36. 二叉搜索树与双向链表
+     输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的循环双向链表。要求不能创建任何新的节点，只能调整树中节点指针的指向。
+
+      
+
+     为了让您更好地理解问题，以下面的二叉搜索树为例：
+
+      
+
+
+
+      
+
+     我们希望将这个二叉搜索树转化为双向循环链表。链表中的每个节点都有一个前驱和后继指针。对于双向循环链表，第一个节点的前驱是最后一个节点，最后一个节点的后继是第一个节点。
+
+     下图展示了上面的二叉搜索树转化成的链表。“head” 表示指向链表中有最小元素的节点。
+
+      
+
+
+
+      
+
+     特别地，我们希望可以就地完成转换操作。当转化完成以后，树中节点的左指针需要指向前驱，树中节点的右指针需要指向后继。还需要返回链表中的第一个节点的指针。
+     https://leetcode-cn.com/problems/er-cha-sou-suo-shu-yu-shuang-xiang-lian-biao-lcof/
+     */
+    Node* treeToDoublyList(Node* root) {
+        if (root == nullptr) {
+            return nullptr;
+        }
+        pair<Node*, Node*> res = doTreeToDoubleList(root);
+        res.first->left = res.second;
+        res.second->right = res.first;
+        
+        return res.first;
+    }
+    
+    pair<Node*, Node*> doTreeToDoubleList(Node* root) {
+        pair<Node*, Node*> res = {nullptr, nullptr};
+        if (root->left == nullptr && root->right == nullptr) {
+            res.first = root;
+            res.second = root;
+            
+            return res;
+        }
+        
+        if (root->left != nullptr) {
+            pair<Node*, Node*> leftList = doTreeToDoubleList(root->left);
+            leftList.second->right = root;
+            root->left = leftList.second;
+            
+            res.first = leftList.first;
+        } else {
+            res.first = root;
+        }
+        
+        
+        if (root->right != nullptr) {
+            pair<Node*, Node*> rightList = doTreeToDoubleList(root->right);
+            root->right = rightList.first;
+            rightList.first->left = root;
+            
+            res.second = rightList.second;
+        } else {
+            res.second = root;
+        }
+        
+        return res;
+    }
+    /**
+     剑指 Offer 32 - III. 从上到下打印二叉树 III
+     请实现一个函数按照之字形顺序打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右到左的顺序打印，第三行再按照从左到右的顺序打印，其他行以此类推。
+
+      
+
+     例如:
+     给定二叉树: [3,9,20,null,null,15,7],
+
+         3
+        / \
+       9  20
+         /  \
+        15   7
+     返回其层次遍历结果：
+
+     [
+       [3],
+       [20,9],
+       [15,7]
+     ]
+      
+
+     提示：
+
+     节点总数 <= 1000
+     https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-iii-lcof/
+     */
+    vector<vector<int>> levelOrderIII(TreeNode* root) {
+        vector<vector<int>> res;
+        
+        stack<TreeNode *> leftStk;
+        stack<TreeNode *> rightStk;
+        if (root != nullptr) {
+            leftStk.push(root);
+        }
+        bool directionFlag = true;
+        while ( !leftStk.empty() || !rightStk.empty() ) {
+            stack<TreeNode *> &currentStk = leftStk.empty() ? rightStk : leftStk;
+            stack<TreeNode *> &nextStk = leftStk.empty() ? leftStk : rightStk;
+            
+            int N = (int)currentStk.size();
+            vector<int> vec(N, 0);
+            for (int i = 0; i < N; ++i) {
+                TreeNode *node = currentStk.top();
+                currentStk.pop();
+                vec[i] = node->val;
+                if (directionFlag) { // 从左到右
+                    if (node->left) {
+                        nextStk.push(node->left);
+                    }
+                    if (node->right) {
+                        nextStk.push(node->right);
+                    }
+                } else {
+                    if (node->right) {
+                        nextStk.push(node->right);
+                    }
+                    if (node->left) {
+                        nextStk.push(node->left);
+                    }
+                }
+            }
+            directionFlag = !directionFlag;
+            res.push_back(vec);
+        }
+        
+        return res;
+    }
+    
+    /**
+     剑指 Offer 54. 二叉搜索树的第k大节点
+     给定一棵二叉搜索树，请找出其中第k大的节点。
+
+      
+
+     示例 1:
+
+     输入: root = [3,1,4,null,2], k = 1
+        3
+       / \
+      1   4
+       \
+        2
+     输出: 4
+     示例 2:
+
+     输入: root = [5,3,6,2,4,null,null,1], k = 3
+            5
+           / \
+          3   6
+         / \
+        2   4
+       /
+      1
+     输出: 4
+     https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-di-kda-jie-dian-lcof/
+     */
+    int kthLargest(TreeNode* root, int k) {
+        int index = 0;
+        TreeNode *node = doKthLargestRecurtion(root, k, index);
+        return node != nullptr ? node->val : 0;
+    }
+    
+    TreeNode *doKthLargestRecurtion(TreeNode *root, int k, int &index) {
+        if (root == nullptr) return nullptr;
+        
+        TreeNode *rightNode = doKthLargestRecurtion(root->right, k, index);
+        if (rightNode != nullptr) {
+            return rightNode;
+        }
+        if (++index == k) {
+            return root;
+        }
+        TreeNode *leftNode = doKthLargestRecurtion(root->left, k, index);
+        return leftNode;
+    }
+    
+    /**
+     剑指 Offer 33. 二叉搜索树的后序遍历序列
+     输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历结果。如果是则返回 true，否则返回 false。假设输入的数组的任意两个数字都互不相同。
+
+      
+
+     参考以下这颗二叉搜索树：
+
+          5
+         / \
+        2   6
+       / \
+      1   3
+     示例 1：
+
+     输入: [1,6,3,2,5]
+     输出: false
+     示例 2：
+
+     输入: [1,3,2,6,5]
+     输出: true
+      
+
+     提示：
+
+     数组长度 <= 1000
+     https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof/
+     */
+    bool verifyPostorder(vector<int>& postorder) {
+        return helperVerifyPostorder(postorder, 0, (int)postorder.size() - 1);
+    }
+    
+    bool helperVerifyPostorder(vector<int> &postorder, int begin, int end) {
+        if (begin >= end) {
+            return true;
+        }
+        
+        int rootValue = postorder[end];
+        int firstRightSunIndex = begin;
+        while (postorder[firstRightSunIndex] < rootValue) {
+            ++firstRightSunIndex;
+        }
+        
+        for (int index = firstRightSunIndex; index < end; ++index) {
+            if (postorder[index] < rootValue) {
+                return false;
+            }
+        }
+        
+        bool leftRes = helperVerifyPostorder(postorder, begin, firstRightSunIndex - 1);
+        if (!leftRes) {
+            return leftRes;
+        }
+        
+        bool righRes = helperVerifyPostorder(postorder, firstRightSunIndex, end - 1);
+        return righRes;
     }
 };
 
