@@ -644,7 +644,7 @@ public:
         }
         bool res = isSubTreeFromRoot(s, t);
         if (res) {
-            return res1;
+            return res;
         }
         return isSubtree(s->left, t) || isSubtree(s->right, t);
     }
@@ -1304,6 +1304,117 @@ public:
         
         bool righRes = helperVerifyPostorder(postorder, firstRightSunIndex, end - 1);
         return righRes;
+    }
+};
+
+
+/**
+ 655. 输出二叉树
+ 在一个 m*n 的二维字符串数组中输出二叉树，并遵守以下规则：
+
+ 行数 m 应当等于给定二叉树的高度。
+ 列数 n 应当总是奇数。
+ 根节点的值（以字符串格式给出）应当放在可放置的第一行正中间。根节点所在的行与列会将剩余空间划分为两部分（左下部分和右下部分）。你应该将左子树输出在左下部分，右子树输出在右下部分。左下和右下部分应当有相同的大小。即使一个子树为空而另一个非空，你不需要为空的子树输出任何东西，但仍需要为另一个子树留出足够的空间。然而，如果两个子树都为空则不需要为它们留出任何空间。
+ 每个未使用的空间应包含一个空的字符串""。
+ 使用相同的规则输出子树。
+ 示例 1:
+
+ 输入:
+      1
+     /
+    2
+ 输出:
+ [["", "1", ""],
+  ["2", "", ""]]
+ 示例 2:
+
+ 输入:
+      1
+     / \
+    2   3
+     \
+      4
+ 输出:
+ [["", "", "", "1", "", "", ""],
+  ["", "2", "", "", "", "3", ""],
+  ["", "", "4", "", "", "", ""]]
+ 示例 3:
+
+ 输入:
+       1
+      / \
+     2   5
+    /
+   3
+  /
+ 4
+ 输出:
+ [["",  "",  "", "",  "", "", "", "1", "",  "",  "",  "",  "", "", ""]
+  ["",  "",  "", "2", "", "", "", "",  "",  "",  "",  "5", "", "", ""]
+  ["",  "3", "", "",  "", "", "", "",  "",  "",  "",  "",  "", "", ""]
+  ["4", "",  "", "",  "", "", "", "",  "",  "",  "",  "",  "", "", ""]]
+ 注意: 二叉树的高度在范围 [1, 10] 中。
+ https://leetcode-cn.com/problems/print-binary-tree/
+ */
+class PrintTreeSolution {
+public:
+    vector<vector<string>> printTree(TreeNode* root) {
+        return doPrintTree(root);
+    }
+
+    vector<vector<string>> doPrintTree(TreeNode* root) {
+        vector<vector<string>> res;
+        if (root == NULL) {
+            return res;
+        }
+
+        vector<string> temp(1, to_string(root->val));
+        res.push_back(temp);
+
+        if (root->left == NULL && root->right == NULL) {
+            return res;
+        }
+
+        vector<vector<string>> left = doPrintTree(root->left);
+        vector<vector<string>> right = doPrintTree(root->right);
+        if (left.size() == 0 && right.size() == 0) {
+            return res;
+        } else if (left.size() == 0 || right.size() == 0) {
+            vector<vector<string>> &empty = left.size() == 0 ? left : right;
+            vector<vector<string>> &other = left.size() == 0 ? right : left;
+            int n = (int)other.size();
+            for (int i = 0; i < n; ++i) {
+                vector<string> temp(other[i].size(), "");
+                empty.push_back(temp);
+            }
+        } else if (left.size() != right.size()) {
+            vector<vector<string>> &small = left.size() < right.size() ? left : right;
+            vector<vector<string>> &big = left.size() < right.size() ? right : left;
+            int bigN = (int)big.size();
+            int smallN = (int)small.size();
+            int bigColumns = (int)big[0].size();
+            int smallColumns = (int)small[0].size();
+            for (int i = 0; i < bigN; ++i) {
+                if (i < smallN) {
+                    small[i].insert(small[i].begin(), (bigColumns - smallColumns)/2, "");
+                    small[i].insert(small[i].end(), (bigColumns - smallColumns)/2, "");
+                } else {
+                    small.push_back(vector<string>(bigColumns, ""));
+                }
+            }
+        }
+
+        // 将right添加到left
+        int ccolumns = (int)left[0].size();
+        res[0].insert(res[0].begin(), ccolumns, "");
+        res[0].insert(res[0].end(), ccolumns, "");
+        for (int i = 0; i < left.size(); ++i) {
+            left[i].insert(left[i].end(), "");
+            left[i].insert(left[i].end(), right[i].begin(), right[i].end());
+            // 将拼接好的left就是下面层的结果加到结果中
+            res.push_back(left[i]);
+        }
+        return res;
     }
 };
 
