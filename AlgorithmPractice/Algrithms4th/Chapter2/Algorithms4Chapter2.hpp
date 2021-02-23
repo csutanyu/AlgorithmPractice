@@ -67,6 +67,7 @@ public:
 
 /**
  希尔排序 P163
+ 已知在最坏的情况下shell排序的比较次数 和 N的3/2次方成正比
  */
 class ShellSort {
 public:
@@ -360,9 +361,25 @@ public:
 class BinaryTreeSolution {
 public:
     bool isBalanced(TreeNode* root) {
+#if 0
         unordered_map<TreeNode *, int> heights;
         unordered_map<TreeNode *, bool> balances;
         return isBalanced(root, heights, balances);
+#else
+        int ret = calculateHeight(root);
+        return ret >= 0;
+#endif
+    }
+
+    int calculateHeight(TreeNode *root) {
+        if (root == NULL) return 0;
+        int left = calculateHeight(root->left);
+        if (left < 0) return left;
+        int right = calculateHeight(root->right);
+        if (right < 0) return right;
+
+        bool isBalanced = abs(left - right) <= 1;
+        return isBalanced ? max(left, right) + 1 : -1;
     }
     
     bool isBalanced(TreeNode* root, unordered_map<TreeNode *, int> &heights, unordered_map<TreeNode *, bool> &balances) {
